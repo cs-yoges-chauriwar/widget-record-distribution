@@ -14,6 +14,11 @@
         ],
         "certified": "No",
         "publisher": "Fortinet",
+        "snapshots": [
+            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.0\/images\/record-distribution-settings.png",
+            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.0\/images\/record-distribution.png"
+        ],
+        "help_online": "https:\/\/github.com\/fortinet-fortisoar\/widget-record-distribution\/blob\/release\/1.0.0\/README.md",
         "compatibility": [
             "7.2.2"
         ]
