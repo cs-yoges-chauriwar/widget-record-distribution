@@ -1,6 +1,6 @@
-# Version 1.0.0
+## Version 1.0.0
 
-- **Features**
+**Features**
 - Provides ability to visualise items/records based on a grouping.
 - Configuration to select module wise picklists and filters to fetch required data to visualise based on selected grouping.
 - Max 100 records will be fetched for rendering details.
