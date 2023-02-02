@@ -34,10 +34,10 @@
           });
           angular.forEach(itemRecords, function (itemRecord) {
             var recordJson = {};
-            recordJson.name = itemRecord.name;
+            recordJson.name = itemRecord.name ? itemRecord.name : itemRecord.value;
             recordJson.id = itemRecord.id;
             recordJson.uuid = itemRecord.uuid;
-            recordJson.image = itemRecord.alertIcon;
+            recordJson.image = itemRecord.icon;
             chartItem.json.push(recordJson);
 
             // Handling for Edge Data

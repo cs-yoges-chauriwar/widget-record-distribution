@@ -4,25 +4,14 @@
     .module('cybersponse')
     .controller('editRecordDistribution100Ctrl', editRecordDistribution100Ctrl);
 
-  editRecordDistribution100Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity'];
+  editRecordDistribution100Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity', 'FormEntityService'];
 
-  function editRecordDistribution100Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity) {
+  function editRecordDistribution100Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity, FormEntityService) {
     $scope.cancel = cancel;
     $scope.save = save;
     $scope.page = $state.params.page;
     $scope.loadAttributes = loadAttributes;
     $scope.updatePicklistItems = updatePicklistItems;
-
-    appModulesService.load(true).then(function (modules) {
-      $scope.modules = modules;
-    });
-
-    $scope.$watch('config.resource', function (oldValue, newValue) {
-      if ($scope.config.resource && oldValue !== newValue) {
-        delete $scope.config.query.filters;
-        $scope.loadAttributes();
-      }
-    });
 
     $scope.config = angular.extend({
       query: {
@@ -36,6 +25,31 @@
       assignedToSetting: 'onlyMe',
       aggregate: true
     }, config);
+
+    appModulesService.load(true).then(function (modules) {
+      if ($state.current.name && ($state.current.name.indexOf('viewPanel') !== -1)) {
+        var viewPanelEntity = FormEntityService.get();
+        var relationshipModules = angular.isDefined(viewPanelEntity) ? viewPanelEntity.getRelationshipFieldsArray() : [];
+        var list = [];
+        if (angular.isDefined(relationshipModules)) {
+          angular.forEach(relationshipModules, function (module) {
+            list.push(module.name);
+          });
+          $scope.modules = _.filter(modules, function(module) {
+            return list.includes(module.type);
+          });
+        }
+      } else {
+        $scope.modules = modules;
+      }
+    });
+
+    $scope.$watch('config.resource', function (oldValue, newValue) {
+      if ($scope.config.resource && oldValue !== newValue) {
+        delete $scope.config.query.filters;
+        $scope.loadAttributes();
+      }
+    });
 
     if ($scope.config.resource) {
       $scope.loadAttributes();

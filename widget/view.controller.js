@@ -62,11 +62,16 @@
     $scope.getList = function () {
       setFilter();
       $scope.processing = true;
-      _config.query.relationships = true;
+      _config.query.relationships = _config.showCorrelation;
       var query = new Query(_config.query);
 
       if (entity) {
-        $resource(API.QUERY + _config.resource).save(query.getQueryModifiers(), query.getQuery(true)).$promise.then(function (result) {
+        var url = API.QUERY;
+        if ($state.current.name && $state.current.name.indexOf('viewPanel') !== -1) {
+          url += $state.params.module + '/' + $state.params.id + '/';
+        }
+        url += _config.resource;
+        $resource(url).save(query.getQueryModifiers(), query.getQuery(true)).$promise.then(function (result) {
           $scope.fieldRows = result['hydra:member'];
           chartData = recordDistributionService.getChartData(_config, $scope.fieldRows);
           ViewTemplateService.getSystemViewTemplates('', 'settings').then(function (response) {
