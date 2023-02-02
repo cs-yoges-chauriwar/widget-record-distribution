@@ -1,0 +1,26 @@
+{
+    "name": "recordDistribution",
+    "title": "Record Distribution",
+    "subTitle": "Ability to visualise items\/records based on a grouping.",
+    "version": "1.0.0",
+    "published_date": 1675382400,
+    "releaseNotes": "available",
+    "metadata": {
+        "description": "Supports:\n- Ability to group by a field in record, say \u201cLevels\u201d in Assets, which will be a Picklists.\n- Goal is to see, how many assets and which ones are there at each level, considering the Asset and level example.\n- Goal is to see both the overall number and the individual record nodes in the group as items in the visual.\n- Ability to add this on a dashboard\/report or a within an incident detail view.",
+        "pages": [
+            "Dashboard",
+            "View Panel",
+            "Reports"
+        ],
+        "certified": "No",
+        "publisher": "Fortinet",
+        "snapshots": [
+            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.0\/images\/record-distribution-settings.png",
+            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.0\/images\/record-distribution.png"
+        ],
+        "help_online": "https:\/\/github.com\/fortinet-fortisoar\/widget-record-distribution\/blob\/release\/1.0.0\/README.md",
+        "compatibility": [
+            "7.2.2"
+        ]
+    }
+}

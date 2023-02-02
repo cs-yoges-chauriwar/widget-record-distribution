@@ -1,0 +1,53 @@
+<style type="text/css">
+    .tag {
+        color: white;
+        border: solid 2px #000000;
+        border-radius: 5px;
+        background: #808080;
+        width: 160px;
+        position: absolute;
+        display: none;
+        padding: 3px 6px;
+        margin-left: -65px;
+        font-size: 11px;
+    }
+
+    .tag:before {
+        border: solid transparent;
+        content: ' ';
+        height: 0;
+        left: 50%;
+        margin-left: -5px;
+        position: absolute;
+        width: 0;
+        border-width: 10px;
+        border-bottom-color: #000000;
+        top: -20px;
+    }
+</style>
+<div class="widget widget-container chart">
+    <div class="display-flex-space-between margin-chart">
+        <div class="padding-right-0 padding-left-0"
+            data-ng-class="(page === 'dashboard' || page === 'reporting') ? 'widget-dashboard-title-width' : 'widget-title-width'">
+            <h5 class="margin-top-0 margin-bottom-0 text-overflow ng-binding" title="{{ config.title }}">{{ config.title
+                }}&nbsp;</h5>
+        </div>
+        <div class="padding-right-0 padding-left-0"
+            data-ng-class="(page === 'dashboard' || page === 'reporting') ? 'widget-dashboard-actions-width' : 'widget-actions-width'">
+            <span class="fa btn widget-action-icon btn-sm pull-right" data-ng-click="collapsed = !collapsed"
+                data-ng-class="{'fa-caret-up': !collapsed, 'fa-caret-down': collapsed}"></span>
+            <span data-ng-hide="page === 'dashboard' || page === 'reporting'"
+                class="icon icon-refresh btn btn-sm widget-action-icon pull-right" ng-click="getList();"
+                data-uib-tooltip="Refresh"></span>
+        </div>
+    </div>
+    <div data-ng-hide="collapsed">
+        <div class="padding-left-lg padding-bottom-lg">
+            <div class="charts-background fade-in-animation">
+                <div id="distributionChart-{{ config.wid }}" style="position: relative;">
+                    <div id="tag-{{ config.wid }}" class="tag"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<form data-ng-submit="save()" class="noMargin" name="editRecordDistributionForm"
+  data-ng-class="{'state-wait': processing }" novalidate>
+  <div class="modal-header">
+    <h3 class="modal-title col-md-9">Record Distribution Edit View</h3>
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal" aria-label="Close"
+      id="close-edit-widget-form-btn">
+      <div aria-hidden="true" class="version-button">+</div>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editRecordDistributionForm.title.$invalid && editRecordDistributionForm.title.$touched }">
+      <label for="title" class="control-label">Title<span class="text-danger">*</span></label>
+      <input id="title" name="title" type="text" class="form-control" data-ng-model="config.title" required>
+      <div data-cs-messages="editRecordDistributionForm.title"></div>
+    </div>
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editRecordDistributionForm.resource.$invalid && editRecordDistributionForm.resource.$touched }"
+      data-ng-if="modules">
+      <label for="resource" class="control-label">{{ sourceLabel }}<span class="text-danger">*</span></label>
+      <select name="resource" id="resource" class="form-control"
+        data-ng-options="module.type as module.name for module in modules" data-ng-model="config.resource"
+        data-ng-change="loadAttributes()" required>
+        <option value="">Select an Option</option>
+      </select>
+      <div data-cs-messages="editRecordDistributionForm.resource"></div>
+    </div>
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editRecordDistributionForm.pickListField.$invalid && editRecordDistributionForm.pickListField.$touched }"
+      data-ng-if="modules">
+      <label for="pickListField" class="control-label">Picklist<span class="text-danger">*</span></label>
+      <select name="pickListField" id="pickListField" class="form-control"
+        data-ng-options="field.name as field.title for field in pickListFields | orderBy: 'title'"
+        data-ng-model="config.pickListField" data-ng-change="updatePicklistItems()" required>
+        <option value="">Select an Option</option>
+      </select>
+      <div data-cs-messages="editRecordDistributionForm.pickListField"></div>
+    </div>
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editRecordDistributionForm.pickListFieldItems.$invalid && editRecordDistributionForm.pickListFieldItems.$touched }"
+      data-ng-if="modules">
+      <label for="pickListFieldItems" class="control-label">Picklist Items<span class="text-danger">*</span></label>
+      <div class="cs-select">
+        <ui-select name="pickListFieldItems" data-ng-model="config.pickListFieldItems" required multiple
+          class="custom-multi-select" tagging="undefined" tagging-label="false">
+          <ui-select-match placeholder="Select Module">{{$item.itemValue}}</ui-select-match>
+          <ui-select-choices repeat="option in pickListFieldItems | filter: $select.search" refresh-delay="0"
+            ng-show="($select.items.length >= 0) || ">
+            <div ng-bind="option.itemValue"></div>
+          </ui-select-choices>
+        </ui-select>
+        <span class="fa fa-sort-desc"></span>
+      </div>
+      <div data-cs-messages="editRecordDistributionForm.pickListFieldItems"></div>
+    </div>
+    <div class="padding-top-lg form-horizontal checkbox">
+      <label for="showCorrelation">
+        <input id="showCorrelation" type="checkbox" name="showCorrelation" data-ng-model="config.showCorrelation">Show
+        Correlation Edges
+      </label>
+      <span data-uib-tooltip="Shows the correlations within the records as lines" data-tooltip-append-to-body="true">
+        <i class="margin-left-sm icon icon-information font-Size-13"></i>
+      </span>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="assignedToSetting" class="control-label">Record Assignment (Default Filter)</label>
+          <select class="form-control" name="assignedToSetting" id="assignedToSetting"
+            ng-model="config.assignedToSetting">
+            <option value="onlyMe">Only Me</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="assignmentField" class="control-label">Assignment Field</label>
+          <select class="form-control" name="assignmentField" id="assignmentField"
+            data-ng-options="field.name as field.title for field in userField | orderBy: 'title'"
+            ng-model="config.mapping.assignedToPerson">
+            <option value="">Select a field</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <cs-spinner data-ng-show="config.resource && (!fieldsArray || fieldsArray.length === 0)"></cs-spinner>
+    <div data-ng-hide="!fieldsArray || fieldsArray.length === 0">
+      <div class="form-group"
+        data-ng-class="{ 'has-error': editRecordDistributionForm.filters.$invalid && editRecordDistributionForm.filters.$touched }">
+        <label for="filters" class="control-label">Filter Criteria</label>
+        <div data-cs-conditional data-ng-if="fieldsArray.length > 0" data-fields="$parent.fields"
+          data-mode="'queryFilters'" data-ng-model="$parent.config.query" data-parent-form="editRecordDistributionForm"
+          data-enable-expression="(page==='dashboard' || page==='reporting')" data-reset-field="$parent.fields"
+          data-show-uuid="true" data-form-name="'editRecordDistributionForm'"></div>
+        <div data-cs-messages="editRecordDistributionForm.filters"></div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary"><i
+        class="icon icon-check margin-right-sm"></i>Save</button>
+    <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()"><i
+        class="icon icon-close margin-right-sm"></i>Close</button>
+  </div>
+</form>
