@@ -123,7 +123,7 @@
     function renderDistributionChart() {
       const categoryWidth = 200;
       const barHeight = 100;
-      const height = chartData.data.length * barHeight;
+      const height = chartData.data.length > 0 ? chartData.data.length * barHeight : 50;
       const width = angular.element(document.querySelector('#distributionChart-' + _config.wid))[0].clientWidth;
 
       d3.select('#distributionChart-' + _config.wid).selectAll("svg").remove();
@@ -132,6 +132,20 @@
         .append("svg")
         .attr("width", width)
         .attr("height", height);
+
+      // Display message and return if no records found
+      if (chartData.data.length < 1) {
+        svg.append('text')
+          .text('No records found !!')
+          .attr('x', 20)
+          .attr('y', 20)
+          .attr('font-size', 16)
+          .attr('text-anchor', 'start')
+          .attr('text-height', 20)
+          .attr('fill', '#fff');
+
+        return;
+      }
 
       // If color is not provided as a part of data, then scale will be used
       var colorScale = d3.scaleLinear()

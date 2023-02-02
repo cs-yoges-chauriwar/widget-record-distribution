@@ -12,6 +12,8 @@
     $scope.page = $state.params.page;
     $scope.loadAttributes = loadAttributes;
     $scope.updatePicklistItems = updatePicklistItems;
+    $scope.isDetailView = $state.current.name && ($state.current.name.indexOf('viewPanel') !== -1);
+    $scope.sourceLabel = $scope.isDetailView ? 'Select Related Data Source' : 'Data Source';
 
     $scope.config = angular.extend({
       query: {
@@ -26,23 +28,7 @@
       aggregate: true
     }, config);
 
-    appModulesService.load(true).then(function (modules) {
-      if ($state.current.name && ($state.current.name.indexOf('viewPanel') !== -1)) {
-        var viewPanelEntity = FormEntityService.get();
-        var relationshipModules = angular.isDefined(viewPanelEntity) ? viewPanelEntity.getRelationshipFieldsArray() : [];
-        var list = [];
-        if (angular.isDefined(relationshipModules)) {
-          angular.forEach(relationshipModules, function (module) {
-            list.push(module.name);
-          });
-          $scope.modules = _.filter(modules, function(module) {
-            return list.includes(module.type);
-          });
-        }
-      } else {
-        $scope.modules = modules;
-      }
-    });
+    _init();
 
     $scope.$watch('config.resource', function (oldValue, newValue) {
       if ($scope.config.resource && oldValue !== newValue) {
@@ -53,6 +39,26 @@
 
     if ($scope.config.resource) {
       $scope.loadAttributes();
+    }
+
+    function _init() {
+      appModulesService.load(true).then(function (modules) {
+        if ($scope.isDetailView) {
+          var viewPanelEntity = FormEntityService.get();
+          var relationshipModules = angular.isDefined(viewPanelEntity) ? viewPanelEntity.getRelationshipFieldsArray() : [];
+          var list = [];
+          if (angular.isDefined(relationshipModules)) {
+            angular.forEach(relationshipModules, function (module) {
+              list.push(module.name);
+            });
+            $scope.modules = _.filter(modules, function (module) {
+              return list.includes(module.type);
+            });
+          }
+        } else {
+          $scope.modules = modules;
+        }
+      });
     }
 
     function loadAttributes() {

@@ -17,7 +17,7 @@
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.resource.$invalid && editRecordDistributionForm.resource.$touched }"
       data-ng-if="modules">
-      <label for="resource" class="control-label">Data Source<span class="text-danger">*</span></label>
+      <label for="resource" class="control-label">{{ sourceLabel }}<span class="text-danger">*</span></label>
       <select name="resource" id="resource" class="form-control"
         data-ng-options="module.type as module.name for module in modules" data-ng-model="config.resource"
         data-ng-change="loadAttributes()" required>
@@ -55,7 +55,8 @@
     </div>
     <div class="padding-top-lg form-horizontal checkbox">
       <label for="showCorrelation">
-        <input id="showCorrelation" type="checkbox" name="showCorrelation" data-ng-model="config.showCorrelation">Show Correlation Edges
+        <input id="showCorrelation" type="checkbox" name="showCorrelation" data-ng-model="config.showCorrelation">Show
+        Correlation Edges
       </label>
       <span data-uib-tooltip="Shows the correlations within the records as lines" data-tooltip-append-to-body="true">
         <i class="margin-left-sm icon icon-information font-Size-13"></i>
