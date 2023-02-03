@@ -1,4 +1,4 @@
-## Release Information
+# Release Information
 
 - **Version**: 1.0.0
 
@@ -13,7 +13,7 @@
 - [Release Notes](./widget/release_notes.md)
 
 
-## Overview
+# Overview
 
 The Record Distribution widget provides the ability to visualise records or items based on a specified grouping. For example, viewing the distribution of assets distribution by purdue levels, or the distribution of alerts by type, severity, etc.
 
