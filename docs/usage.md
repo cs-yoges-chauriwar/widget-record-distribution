@@ -26,7 +26,7 @@ The following image displays a Record Distribution widget containing assets grou
 
 The following image displays the Record Distribution widget containing alerts (that are linked to the asset record) grouped by their severity in the detail view of an asset record:
 
-<img src="https://raw.githubusercontent.com/fortinet-fortisoar/widget-record-distribution/release/1.0.0/docs/media/RecordDistributionModuleView" alt="Displaying the Alert Distribution widget on a Asset record" style="border: 1px solid #A9A9A9; border-radius: 4px; padding: 10px; display: block; margin-left: auto; margin-right: auto;">
+<img src="https://raw.githubusercontent.com/fortinet-fortisoar/widget-record-distribution/release/1.0.0/docs/media/RecordDistributionModuleView.png" alt="Displaying the Alert Distribution widget on a Asset record" style="border: 1px solid #A9A9A9; border-radius: 4px; padding: 10px; display: block; margin-left: auto; margin-right: auto;">
 
 **Note**: If the asset record does not have any linked alerts, then the Record Distribution widget will display a '**No records found!**' message.
 
