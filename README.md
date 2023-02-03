@@ -8,15 +8,16 @@
 
 - **Compatibility**: 7.2.0 and later
 
-- **Applicable**: Dashboards, Reports and View Panels
+- **Applicable**: Dashboards, Reports, and View Panel
 
 - [Release Notes](./widget/release_notes.md)
 
 
 ## Overview
 
-The Record Distribution widget provides ability to visualise items/records based on a grouping. Examples, Asset distribution By Purdue Levels, Alert Distribution By Severity/Status etc.
-- Ability to group by a field in record, say “Levels” in Assets, which will be a Picklists.
-- Goal is to see, how many assets and which ones are there at each level, considering the Asset and level example.
-- Goal is to see the individual record nodes in the group as items in the visual.
-- Ability to add this on a dashboard/report or a within an incident detail view.
+The Record Distribution widget provides the ability to visualise records or items based on a specified grouping. For example, viewing the distribution of assets distribution by purdue levels, or the distribution of alerts by type, severity, etc.
+
+## Next Steps
+
+| [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) | [Contents](./docs/contents.md) |
+|----------------------------------------------|------------------------------------------------|--------------------------|--------------------------------|
