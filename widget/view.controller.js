@@ -4,9 +4,9 @@
     .module('cybersponse')
     .controller('recordDistribution100Ctrl', recordDistribution100Ctrl);
 
-  recordDistribution100Ctrl.$inject = ['$scope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService'];
+  recordDistribution100Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate'];
 
-  function recordDistribution100Ctrl($scope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService) {
+  function recordDistribution100Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate) {
     var entity = null;
     var chartData = {};
     var _config = angular.copy(config);
@@ -57,6 +57,49 @@
           _config.query.filters.push(selfFilter);
         }
       }
+    };
+
+    function _objectCopy(filterValue) {
+      var returnValue = filterValue['@id'] ? { '@id': filterValue['@id'], '@type': filterValue['@type'], itemValue: filterValue.itemValue, id: filterValue.id } : filterValue;
+      return returnValue;
+    }
+
+    $scope._minify = function (qFilters) {
+      var filters = [];
+      qFilters.forEach(function (filter) {
+        var cFilter = angular.copy(filter);
+        if (!angular.isUndefined(filter.logic) && filter.logic.length > 0) {
+          cFilter.filters = $scope._minify(filter.filters);
+        }
+        else if (angular.isArray(filter.value)) {
+          cFilter.value = [];
+          filter.value.forEach(function (fValue) {
+            cFilter.value.push(_objectCopy(fValue));
+          });
+        }
+        else if (angular.isObject(filter.value)) {
+          cFilter.value = _objectCopy(filter.value);
+          if (filter.value.displayName) {
+            cFilter.display = filter.value.displayName;
+          } else {
+            cFilter.display = $interpolate(filter.displayTemplate)(filter.value);
+            if (cFilter.display) {
+              delete cFilter.displayTemplate;
+            }
+          }
+        }
+        else if (filter._value) {
+          if (filter._value.display) {
+            cFilter.display = filter._value.display;
+          }
+          if (filter._value.itemValue) {
+            cFilter.itemValue = filter._value.itemValue;
+            cFilter.display = filter._value.itemValue;
+          }
+        }
+        filters.push(cFilter);
+      });
+      return filters;
     };
 
     $scope.getList = function () {
@@ -122,9 +165,19 @@
 
     function renderDistributionChart() {
       const categoryWidth = 200;
-      const barHeight = 100;
-      const height = chartData.data.length > 0 ? chartData.data.length * barHeight : 50;
+      const categoryHeight = 100;
+      const height = chartData.data.length > 0 ? chartData.data.length * categoryHeight : 50;
       const width = angular.element(document.querySelector('#distributionChart-' + _config.wid))[0].clientWidth;
+      const viewMoreWidth = 25;
+      const viewMoreImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAUNJREFUaEPtlLtKBEEQRc+C4gcY+msGJj4y0TVQwTcoGhm6iYmIP2XsN4iJUlDIBjvuNGcXGahJu+pO3Xu6esTAv9HA56cM/DfBIlAEZAJ1hWSAur0I6AilQBGQAer2IqAjlAJFQAao24uAjlAKFAEZoG7vS2AVuAC2gBXgDTgBPjsmWANugM08fwHOgK8F1f/K9DVwCRwCVzlEmHkF9jsGegC2sz5Kon4CHC+ovtnAO/AM3GbnLnAHrAPfM4b6AMLEY54dAEfARoeB1nptYC/NDMZAXIExcJ1X6HzOFboHdrI+0or6p9ybWRBa65sJxBLHENNLfDpnicPs9BJH/19L3FLfbEA/d8sS6PsKLev/WrcM6AilQBGQAer2IqAjlAJFQAao24uAjlAKFAEZoG4vAjpCKVAEZIC6vQjoCKXA4An8AA8LOjFG6YpKAAAAAElFTkSuQmCC';
+      const backgroundColor = $rootScope.theme.id === "light" ? "#f2f2f3" : $rootScope.theme.id === "dark" ? "#1d1d1d" : "#212c3a";
+      const textColor = $rootScope.theme.id === "light" ? "#000000" : "#ffffff";
+      const strokeColor = $rootScope.theme.id === "light" ? "#e4e4e4" : "#000000";
+
+      // Calculate max items in a row can be render
+      const itemWidth = 160;
+      const maxItems = Math.floor((width - categoryWidth) / itemWidth);
+      var state = appModulesService.getState(_config.resource);
 
       d3.select('#distributionChart-' + _config.wid).selectAll("svg").remove();
 
@@ -135,14 +188,23 @@
 
       // Display message and return if no records found
       if (chartData.data.length < 1) {
+        svg.append('rect')
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('rx', 4)
+          .attr('width', width)
+          .attr('height', height)
+          .attr('stroke', strokeColor)
+          .attr('fill', backgroundColor);
+
         svg.append('text')
-          .text('No records found !!')
+          .text('No records found !')
           .attr('x', 20)
-          .attr('y', 20)
+          .attr('y', 30)
           .attr('font-size', 16)
           .attr('text-anchor', 'start')
           .attr('text-height', 20)
-          .attr('fill', '#fff');
+          .attr('fill', textColor);
 
         return;
       }
@@ -152,8 +214,6 @@
         .domain([0, chartData.data.length])
         .range(["#00B9FA", "#F95002"])
         .interpolate(d3.interpolateHcl);
-
-      var categoryHeight = height / chartData.data.length;
 
       // Row rendering
       var categoryRect = svg.append('g')
@@ -198,6 +258,40 @@
         })
         .attr('opacity', 0.7);
 
+      // View All Records option
+      var viewMoreImage = categoryRect.append("svg:image")
+        .attr('x', width - viewMoreWidth)
+        .attr('y', function (d, i) {
+          return i * (categoryHeight) + 40;
+        })
+        .attr('width', 20)
+        .attr('height', 20)
+        .attr('class', function (d) {
+          return (d.json.length > maxItems) ? 'cursorPointer' : 'hide';
+        })
+        .attr("xlink:href", viewMoreImg)
+        .on('click', function (d) {
+          var query = angular.copy(_config.query);
+          var addFilter = {
+            field: _config.pickListField,
+            displayTemplate: entity.fields[_config.pickListField].displayTemplate,
+            display: d.picklist.itemValue,
+            value: d.picklist,
+            operator: 'eq'
+          };
+          query.filters = query.filters.concat(addFilter);
+          var _q = { filters: $scope._minify(query.filters), logic: query.logic };
+          $state.go('main.modules.list', {
+            module: _config.resource,
+            query: encodeURIComponent(JSON.stringify(_q)),
+            qparam: $state.params.qparam
+          });
+        });
+
+      // View All Records Image Title
+      viewMoreImage.append('title')
+        .text('View All Records');
+
       // Category Text Rendering
       categoryRect.append('text')
         .text(function (d) {
@@ -216,10 +310,6 @@
         .attr('id', "content-" + _config.wid);
 
       // Render data in rows
-      // Calculate max items in a row can be render
-      const itemWidth = 160;
-      const maxItems = Math.floor((width - categoryWidth) / itemWidth);
-      var state = appModulesService.getState(_config.resource);
       angular.forEach(chartData.data, (data, index) => {
         var filteredData = _.filter(data.json, (item, index) => {
           return index < maxItems;
@@ -243,6 +333,7 @@
           })
           .attr('width', 40)
           .attr('height', 40)
+          .attr('class', 'cursorPointer')
           .attr("xlink:href", function (d) {
             return d.image ? d.image : $scope.defaultImg;
           })

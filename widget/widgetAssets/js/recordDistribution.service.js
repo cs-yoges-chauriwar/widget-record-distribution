@@ -32,6 +32,10 @@
           var itemRecords = _.filter(records, function (record) {
             return record[config.pickListField] && record[config.pickListField].itemValue ? record[config.pickListField].itemValue === fieldItem.itemValue : false;
           });
+          // Get picklist details
+          if (itemRecords.length > 0) {
+            chartItem.picklist = itemRecords[0][config.pickListField];
+          }
           angular.forEach(itemRecords, function (itemRecord) {
             var recordJson = {};
             recordJson.name = itemRecord.name ? itemRecord.name : itemRecord.value;

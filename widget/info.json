@@ -1,12 +1,12 @@
 {
     "name": "recordDistribution",
     "title": "Record Distribution",
-    "subTitle": "Ability to visualise items\/records based on a grouping.",
+    "subTitle": "Ability to visualise items/records and their correlations in different levels based on a given grouping context. A very good example of the widget's utility is the OT view, where assets are visualised across different Purdue Levels and highlight any existing relations with other assets at different levels.",
     "version": "1.0.0",
     "published_date": 1675382400,
     "releaseNotes": "available",
     "metadata": {
-        "description": "Supports:\n- Ability to group by a field in record, say \u201cLevels\u201d in Assets, which will be a Picklists.\n- Goal is to see, how many assets and which ones are there at each level, considering the Asset and level example.\n- Goal is to see both the overall number and the individual record nodes in the group as items in the visual.\n- Ability to add this on a dashboard\/report or a within an incident detail view.",
+        "description": "This widget has the following notable configurations available:\n- Ability to group records by a field in the record, say “Levels” in Assets, which will be a Picklist.\n- Ability to apply a filter on data source to allow limiting of input records.\n- Ability to select which grouping values in the picklist to show in the view.\n- Ability to show/hide record correlations.\n- Ability to view all the records in the list grid, in scenarios where there are more records that can fit in the view.\n- Ability to assign different icons to different types of records.\n- Ability to click-through a record node to its respective detail view.\n- Views adaptive in both light and dark themes.\n- Ability to add this on a dashboard/report or a within an incident detail view.",
         "pages": [
             "Dashboard",
             "View Panel",
