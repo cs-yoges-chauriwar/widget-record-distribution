@@ -1,9 +1,6 @@
-## Version 1.0.0
+# Features
 
-**Features**
-- Provides ability to visualise items/records based on a grouping.
-- Configuration to select module wise picklists and filters to fetch required data to visualise based on selected grouping.
-- Max 100 records will be fetched for rendering details.
-- Correlation lines to see relationship between records at different grouping levels. Support to show/hide correlation edges.
-- Support to add widget on Dahsboard/Reports or within modules detail view.
-- Support to export visuals as PDF in reporting section.
+- Allows users to visualise items or records based on the specified grouping.
+- Allows users to configure the widget by choosing module-wise picklists and specifying filters to ensure that the widget retrieves the necessary data.  
+  **Note**: A maximum of 100 records are fetched for rendering details.
+- Allows users to add visual lines to view correlations between records from the same module that are grouped at various levels. 
