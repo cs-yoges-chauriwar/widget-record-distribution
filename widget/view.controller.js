@@ -4,9 +4,9 @@
     .module('cybersponse')
     .controller('recordDistribution100Ctrl', recordDistribution100Ctrl);
 
-  recordDistribution100Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate'];
+  recordDistribution100Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
 
-  function recordDistribution100Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate) {
+  function recordDistribution100Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
     var entity = null;
     var chartData = {};
     var _config = angular.copy(config);
@@ -25,6 +25,12 @@
         if (!angular.isUndefined(assignedToPerson) && !angular.isUndefined(entity.fields[assignedToPerson])) {
           $scope.filterByAssignedToPerson = true;
           $scope.assignedFieldName = entity.fields[assignedToPerson].title;
+        }
+        let iconFieldArray = _.filter(entity.getFormFieldsArray(), function (field) {
+          return field.type === 'lookup' && field.name === config.iconField;
+        });
+        if (iconFieldArray.length > 0) {
+          $scope.iconFieldModule = iconFieldArray[0].module;
         }
       }
 
@@ -105,35 +111,58 @@
     $scope.getList = function () {
       setFilter();
       $scope.processing = true;
-      _config.query.relationships = _config.showCorrelation;
-      var query = new Query(_config.query);
 
       if (entity) {
+        var displayFieldKeys = CommonUtils.getDisplayTemplateKey(entity.displayTemplate);
+        var selectFields = displayFieldKeys.concat(['@id', 'uuid', _config.pickListField, _config.iconField]);
+        _config.query.relationships = _config.showCorrelation;
+        _config.query.__selectFields = _config.showCorrelation ? selectFields.concat([_config.resource]) : selectFields;
+        var query = new Query(_config.query);
+        var _query = query.getQueryModifiers();
+        _query.$export = true;
+
         var url = API.QUERY;
         if ($state.current.name && $state.current.name.indexOf('viewPanel') !== -1) {
           url += $state.params.module + '/' + $state.params.id + '/';
         }
         url += _config.resource;
-        $resource(url).save(query.getQueryModifiers(), query.getQuery(true)).$promise.then(function (result) {
-          $scope.fieldRows = result['hydra:member'];
-          chartData = recordDistributionService.getChartData(_config, $scope.fieldRows);
-          ViewTemplateService.getSystemViewTemplates('', 'settings').then(function (response) {
-            if (response.data['hydra:member'].length > 0) {
-              _.each(response.data['hydra:member'], function (setting) {
-                var moduleType = setting.uuid.split('-')[1];
-                if (_config.resource === moduleType && setting.config && setting.config.correlationConfig && setting.config.correlationConfig.$image) {
-                  $scope.defaultImg = setting.config.correlationConfig.$image;
-                }
-              });
-            }
+        $resource(url).save(_query, query.getQuery(true)).$promise.then(function (result) {
+          if (result['hydra:member'].length > 0) {
+            generateChartData(result['hydra:member']);
+          } else {
             renderDistributionChart();
-          });
-          $scope.processing = false;
-        }, angular.noop).finally(function () {
-          $scope.processing = false;
+            $scope.processing = false;
+          }
         });
       }
     };
+
+    function generateChartData(records) {
+      var iconDataCollections = [];
+      var params = {
+        module: $scope.iconFieldModule,
+        $limit: 30,
+        __selectFields: '@id,icon'
+      };
+      Modules.get(params).$promise.then(function (data) {
+        iconDataCollections = data['hydra:member'];
+      }).finally(function () {
+        chartData = recordDistributionService.getChartData(entity, _config, records, iconDataCollections);
+        ViewTemplateService.getSystemViewTemplates('', 'settings').then(function (response) {
+          if (response.data['hydra:member'].length > 0) {
+            _.each(response.data['hydra:member'], function (setting) {
+              var moduleType = setting.uuid.split('-')[1];
+              if (_config.resource === moduleType && setting.config && setting.config.correlationConfig && setting.config.correlationConfig.$image) {
+                $scope.defaultImg = setting.config.correlationConfig.$image;
+              }
+            });
+          }
+        }).finally(function () {
+          renderDistributionChart();
+          $scope.processing = false;
+        });
+      });
+    }
 
     function wrap() {
       var self = d3.select(this),

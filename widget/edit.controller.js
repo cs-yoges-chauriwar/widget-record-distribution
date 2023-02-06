@@ -18,8 +18,7 @@
     $scope.config = angular.extend({
       query: {
         filters: [],
-        limit: 100,
-        relationships: true
+        limit: 100
       },
       mapping: {
         assignedToPerson: undefined
@@ -63,11 +62,15 @@
 
     function loadAttributes() {
       $scope.pickListFields = [];
+      $scope.iconFields = [];
       var entity = new Entity($scope.config.resource);
       entity.loadFields().then(function () {
         $scope.fieldsArray = entity.getFormFieldsArray();
         $scope.pickListFields = _.filter($scope.fieldsArray, function (field) {
           return field.type === 'picklist' && field.options;
+        });
+        $scope.iconFields = _.filter($scope.fieldsArray, function (field) {
+          return field.type === 'lookup';
         });
         $scope.userField = _.filter($scope.fieldsArray, function (field) {
           return field.type !== 'manyToMany' && field.model === 'people';
