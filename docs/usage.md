@@ -25,13 +25,15 @@ An example of using the Record Distribution widget would be to display the asset
 
 ### Record Distribution Widget - Dashboard View
 
-The following image displays a Record Distribution widget containing assets grouped by their levels on a Dashboard. It also includes visual lines that display the correlations between asset records grouped at various levels: 
+The following image displays a Record Distribution widget based on our example, i.e., you can view assets grouped by their levels on a Dashboard. It also includes visual lines that display the correlations between asset records grouped at various levels: 
 
 <img src="https://raw.githubusercontent.com/fortinet-fortisoar/widget-record-distribution/release/1.0.0/docs/media/RecordDistributionView.png" alt="Displaying the Asset Distribution widget on a Dashboard" style="border: 1px solid #A9A9A9; border-radius: 4px; padding: 10px; display: block; margin-left: auto; margin-right: auto;">
 
+Click **View All Records** to view a list view of all records that are filtered as per the grouping criteria. In our example, clicking View All Records displays a list of all asset records filtered as per their level, for example, all asset records at 'Level 5'. This is required since a maximum of 100 records are fetched for rendering details.
+
 ### Record Distribution Widget - Module Detail View
 
-The following image displays the Record Distribution widget containing alerts (that are linked to the asset record) grouped by their severity in the detail view of an asset record:
+The following image displays the Record Distribution widget based on our example, i.e., you can view alerts (that are linked to the asset record) grouped by their severity in the detail view of an asset record:
 
 <img src="https://raw.githubusercontent.com/fortinet-fortisoar/widget-record-distribution/release/1.0.0/docs/media/RecordDistributionModuleView.png" alt="Displaying the Alert Distribution widget on a Asset record" style="border: 1px solid #A9A9A9; border-radius: 4px; padding: 10px; display: block; margin-left: auto; margin-right: auto;">
 
