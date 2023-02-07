@@ -40,6 +40,9 @@
       data-ng-class="{ 'has-error': editRecordDistributionForm.iconField.$invalid && editRecordDistributionForm.iconField.$touched }"
       data-ng-if="modules">
       <label for="iconField" class="control-label">Icon for Record View<span class="text-danger">*</span></label>
+      <span data-uib-tooltip="Provide lookup field associated with the record icon" data-tooltip-append-to-body="true">
+        <i class="margin-left-sm icon icon-information font-Size-13"></i>
+      </span>
       <select name="iconField" id="iconField" class="form-control"
         data-ng-options="field.name as field.title for field in iconFields | orderBy: 'title'"
         data-ng-model="config.iconField" required>
