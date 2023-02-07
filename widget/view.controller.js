@@ -19,6 +19,9 @@
       $scope.page = $state.params.page;
     }
 
+    /*
+     * This method initialize required attributes, retrives icon field lookup modules.
+     */
     function _init() {
       if (entity) {
         var assignedToPerson = config.mapping.assignedToPerson;
@@ -37,6 +40,10 @@
       $scope.getList();
     }
 
+    /*
+     * This method create filter JSON as per selection in configuration to send
+     * as a part of request payload.
+     */
     var setFilter = function () {
       _config = angular.copy(config);
       var selfFilter = '';
@@ -70,6 +77,10 @@
       return returnValue;
     }
 
+    /*
+     * This method is responsible for managing filters to view more records on
+     * specific selection/click on rendered chart.
+     */
     $scope._minify = function (qFilters) {
       var filters = [];
       qFilters.forEach(function (filter) {
@@ -108,6 +119,9 @@
       return filters;
     };
 
+    /*
+     * This method fetch records to render record distribution chart as per configuration selection.
+     */
     $scope.getList = function () {
       setFilter();
       $scope.processing = true;
@@ -137,6 +151,10 @@
       }
     };
 
+    /*
+     * This method fetch lookup module data to get icons for record rendering
+     * and calls record distribution service method to form chart data in required JSON format.
+     */
     function generateChartData(records) {
       var iconDataCollections = [];
       var params = {
@@ -164,6 +182,10 @@
       });
     }
 
+    /*
+     * The purpose of this method is to truncate string with ellipsis if text length
+     * is more than 180.
+     */
     function wrap() {
       var self = d3.select(this),
         textLength = self.node().getComputedTextLength(),
@@ -175,6 +197,10 @@
       }
     }
 
+    /*
+     * The purpose of this method is to update edge object entries with X and Y coordinates
+     * to render lines on chart.
+     */
     function updateCoordinates() {
       var self = d3.select(this);
       var x = +self.attr('x') + 20;
@@ -192,6 +218,10 @@
       });
     }
 
+    /*
+     * This method is responsible for rendering record distribution chart as per chartData
+     * using d3 library API's.
+     */
     function renderDistributionChart() {
       const categoryWidth = 200;
       const categoryHeight = 100;

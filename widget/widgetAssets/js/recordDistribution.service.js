@@ -13,6 +13,9 @@
     };
     return service;
 
+    /*
+     * This method creates map of lookup module id and icon field.
+     */
     function _getIconMap(iconDataCollection) {
       var iconValues = {};
       angular.forEach(iconDataCollection, function (iconValue) {
@@ -21,6 +24,9 @@
       return iconValues;
     }
 
+    /*
+     * This method creates map of picklist id and item value.
+     */
     function _getPicklistMap(pickListFieldItems) {
       var itemValues = {};
       angular.forEach(pickListFieldItems, function (picklistField) {

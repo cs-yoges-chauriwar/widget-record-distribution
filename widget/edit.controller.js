@@ -40,6 +40,12 @@
       $scope.loadAttributes();
     }
 
+    /*
+     * The purpose of this initialize method is to create module list for populate
+     * on configuration screen.
+     * For Dahboard or Reports, all modules are listed for selection.
+     * For View panel, only related modules of selected records are listed.
+     */
     function _init() {
       appModulesService.load(true).then(function (modules) {
         if ($scope.isDetailView) {
@@ -60,6 +66,9 @@
       });
     }
 
+    /*
+     * This method loads all initial attributes and lists.
+     */
     function loadAttributes() {
       $scope.pickListFields = [];
       $scope.iconFields = [];
@@ -83,12 +92,18 @@
       });
     }
 
+    /*
+     * The purpose of method is to update picklist items on picklist selection change.
+     */
     function updatePicklistItems() {
       $scope.config.pickListFieldItems = undefined;
       getPicklistItems();
       $scope.config.pickListFieldItems = $scope.pickListFieldItems;
     }
 
+    /*
+     * This method fetch picklist items as per picklist selection.
+     */
     function getPicklistItems() {
       $scope.pickListFieldItems = [];
       if ($scope.pickListFields.length > 0 && $scope.config.pickListField) {
