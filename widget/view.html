@@ -24,6 +24,14 @@
         border-bottom-color: #000000;
         top: -20px;
     }
+
+    .cursorPointer {
+        cursor: pointer;
+    }
+
+    .hide {
+        display: none;
+    }
 </style>
 <div class="widget widget-container chart">
     <div class="display-flex-space-between margin-chart">
@@ -42,6 +50,9 @@
         </div>
     </div>
     <div data-ng-hide="collapsed">
+        <div data-ng-if="processing">
+            <cs-spinner></cs-spinner>
+        </div>
         <div class="padding-left-lg padding-bottom-lg">
             <div class="charts-background fade-in-animation">
                 <div id="distributionChart-{{ config.wid }}" style="position: relative;">

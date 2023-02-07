@@ -18,8 +18,7 @@
     $scope.config = angular.extend({
       query: {
         filters: [],
-        limit: 100,
-        relationships: true
+        limit: 100
       },
       mapping: {
         assignedToPerson: undefined
@@ -41,6 +40,12 @@
       $scope.loadAttributes();
     }
 
+    /*
+     * The purpose of this initialize method is to create module list for populate
+     * on configuration screen.
+     * For Dahboard or Reports, all modules are listed for selection.
+     * For View panel, only related modules of selected records are listed.
+     */
     function _init() {
       appModulesService.load(true).then(function (modules) {
         if ($scope.isDetailView) {
@@ -61,13 +66,20 @@
       });
     }
 
+    /*
+     * This method loads all initial attributes and lists.
+     */
     function loadAttributes() {
       $scope.pickListFields = [];
+      $scope.iconFields = [];
       var entity = new Entity($scope.config.resource);
       entity.loadFields().then(function () {
         $scope.fieldsArray = entity.getFormFieldsArray();
         $scope.pickListFields = _.filter($scope.fieldsArray, function (field) {
           return field.type === 'picklist' && field.options;
+        });
+        $scope.iconFields = _.filter($scope.fieldsArray, function (field) {
+          return field.type === 'lookup';
         });
         $scope.userField = _.filter($scope.fieldsArray, function (field) {
           return field.type !== 'manyToMany' && field.model === 'people';
@@ -80,12 +92,18 @@
       });
     }
 
+    /*
+     * The purpose of method is to update picklist items on picklist selection change.
+     */
     function updatePicklistItems() {
       $scope.config.pickListFieldItems = undefined;
       getPicklistItems();
       $scope.config.pickListFieldItems = $scope.pickListFieldItems;
     }
 
+    /*
+     * This method fetch picklist items as per picklist selection.
+     */
     function getPicklistItems() {
       $scope.pickListFieldItems = [];
       if ($scope.pickListFields.length > 0 && $scope.config.pickListField) {
