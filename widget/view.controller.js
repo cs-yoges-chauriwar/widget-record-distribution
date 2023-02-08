@@ -8,7 +8,7 @@
 
   function recordDistribution100Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
     var entity = null;
-    var chartData = {};
+    var chartData = { "data": [], "edges": [] };
     var _config = angular.copy(config);
     $scope.processing = false;
     $scope.assignedFieldName = '';
@@ -147,6 +147,9 @@
             renderDistributionChart();
             $scope.processing = false;
           }
+        }, function (error) {
+          renderDistributionChart();
+          $scope.processing = false;
         });
       }
     };
