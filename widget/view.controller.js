@@ -8,7 +8,7 @@
 
   function recordDistribution100Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
     var entity = null;
-    var chartData = { "data": [], "edges": [] };
+    var chartData = { 'data': [], 'edges': [] };
     var _config = angular.copy(config);
     $scope.processing = false;
     $scope.assignedFieldName = '';
@@ -232,21 +232,21 @@
       const width = angular.element(document.querySelector('#distributionChart-' + _config.wid))[0].clientWidth;
       const viewMoreWidth = 25;
       const viewMoreImg = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAUNJREFUaEPtlLtKBEEQRc+C4gcY+msGJj4y0TVQwTcoGhm6iYmIP2XsN4iJUlDIBjvuNGcXGahJu+pO3Xu6esTAv9HA56cM/DfBIlAEZAJ1hWSAur0I6AilQBGQAer2IqAjlAJFQAao24uAjlAKFAEZoG7vS2AVuAC2gBXgDTgBPjsmWANugM08fwHOgK8F1f/K9DVwCRwCVzlEmHkF9jsGegC2sz5Kon4CHC+ovtnAO/AM3GbnLnAHrAPfM4b6AMLEY54dAEfARoeB1nptYC/NDMZAXIExcJ1X6HzOFboHdrI+0or6p9ybWRBa65sJxBLHENNLfDpnicPs9BJH/19L3FLfbEA/d8sS6PsKLev/WrcM6AilQBGQAer2IqAjlAJFQAao24uAjlAKFAEZoG4vAjpCKVAEZIC6vQjoCKXA4An8AA8LOjFG6YpKAAAAAElFTkSuQmCC';
-      const backgroundColor = $rootScope.theme.id === "light" ? "#f2f2f3" : $rootScope.theme.id === "dark" ? "#1d1d1d" : "#212c3a";
-      const textColor = $rootScope.theme.id === "light" ? "#000000" : "#ffffff";
-      const strokeColor = $rootScope.theme.id === "light" ? "#e4e4e4" : "#000000";
+      const backgroundColor = $rootScope.theme.id === 'light' ? '#f2f2f3' : $rootScope.theme.id === 'dark' ? '#1d1d1d' : '#212c3a';
+      const textColor = $rootScope.theme.id === 'light' ? '#000000' : '#ffffff';
+      const strokeColor = $rootScope.theme.id === 'light' ? '#e4e4e4' : '#000000';
 
       // Calculate max items in a row can be render
       const itemWidth = 160;
       const maxItems = Math.floor((width - categoryWidth) / itemWidth);
       var state = appModulesService.getState(_config.resource);
 
-      d3.select('#distributionChart-' + _config.wid).selectAll("svg").remove();
+      d3.select('#distributionChart-' + _config.wid).selectAll('svg').remove();
 
       const svg = d3.selectAll('#distributionChart-' + _config.wid)
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height);
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
 
       // Display message and return if no records found
       if (chartData.data.length < 1) {
@@ -274,7 +274,7 @@
       // If color is not provided as a part of data, then scale will be used
       var colorScale = d3.scaleLinear()
         .domain([0, chartData.data.length])
-        .range(["#00B9FA", "#F95002"])
+        .range(['#00B9FA', '#F95002'])
         .interpolate(d3.interpolateHcl);
 
       // Row rendering
@@ -321,7 +321,7 @@
         .attr('opacity', 0.7);
 
       // View All Records option
-      var viewMoreImage = categoryRect.append("svg:image")
+      var viewMoreImage = categoryRect.append('svg:image')
         .attr('x', width - viewMoreWidth)
         .attr('y', function (d, i) {
           return i * (categoryHeight) + 40;
@@ -331,7 +331,7 @@
         .attr('class', function (d) {
           return (d.json.length > maxItems) ? 'cursorPointer' : 'hide';
         })
-        .attr("xlink:href", viewMoreImg)
+        .attr('xlink:href', viewMoreImg)
         .on('click', function (d) {
           var query = angular.copy(_config.query);
           var addFilter = {
@@ -369,7 +369,7 @@
         .attr('fill', '#fff');
 
       var contents = svg.append('g')
-        .attr('id', "content-" + _config.wid);
+        .attr('id', 'content-' + _config.wid);
 
       // Render data in rows
       angular.forEach(chartData.data, (data, index) => {
@@ -377,7 +377,7 @@
           return index < maxItems;
         });
         var item = contents.append('g')
-          .attr('id', "content-" + _config.wid + "-" + data.itemValue)
+          .attr('id', 'content-' + _config.wid + '-' + data.itemValue)
           .selectAll('g')
           .data(filteredData)
           .enter()
@@ -386,7 +386,7 @@
             return d.uuid;
           });
 
-        item.append("svg:image")
+        item.append('svg:image')
           .attr('x', function (d, i) {
             return categoryWidth + 60 + i * 150;
           })
@@ -396,30 +396,30 @@
           .attr('width', 40)
           .attr('height', 40)
           .attr('class', 'cursorPointer')
-          .attr("xlink:href", function (d) {
+          .attr('xlink:href', function (d) {
             return d.image ? d.image : $scope.defaultImg;
           })
           .each(updateCoordinates)
           .on('mouseover', function (e) {
-            var tag = "";
+            var tag = '';
 
-            tag = "Name: " + d3.select(this).data()[0].name + "<br/>" +
-              "ID: " + d3.select(this).data()[0].id;
-            var output = document.getElementById("tag-" + _config.wid);
+            tag = 'Name: ' + d3.select(this).data()[0].name + '<br/>' +
+              'ID: ' + d3.select(this).data()[0].id;
+            var output = document.getElementById('tag-' + _config.wid);
 
-            var x = this.x.animVal.value + "px";
-            var y = this.y.animVal.value + 50 + "px";
+            var x = this.x.animVal.value + 'px';
+            var y = this.y.animVal.value + 50 + 'px';
 
             output.innerHTML = tag;
             output.style.top = y;
             output.style.left = x;
-            output.style.display = "block";
-            output.style.position = "absolute";
-            output.style.pointerEvents = "none";
+            output.style.display = 'block';
+            output.style.position = 'absolute';
+            output.style.pointerEvents = 'none';
           })
           .on('mouseout', function () {
-            var output = document.getElementById("tag-" + _config.wid);
-            output.style.display = "none";
+            var output = document.getElementById('tag-' + _config.wid);
+            output.style.display = 'none';
           })
           .on('click', function (d) {
             $state.go(state, {

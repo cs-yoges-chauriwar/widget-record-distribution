@@ -40,7 +40,7 @@
      *
      */
     function getChartData(entity, config, records, iconDataCollection) {
-      var chartData = { "data": [], "edges": [] };
+      var chartData = { 'data': [], 'edges': [] };
       if (config.pickListField && (config.pickListFieldItems && config.pickListFieldItems.length > 0) && records.length > 0) {
         let picklistMap = _getPicklistMap(config.pickListFieldItems);
         let iconMap = _getIconMap(iconDataCollection);
