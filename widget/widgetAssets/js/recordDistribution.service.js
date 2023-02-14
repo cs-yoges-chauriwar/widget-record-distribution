@@ -5,9 +5,9 @@
     .module('cybersponse')
     .factory('recordDistributionService', recordDistributionService);
 
-  recordDistributionService.$inject = ['_', '$q', '$http', 'API', '$interpolate'];
+  recordDistributionService.$inject = ['_', '$q', '$interpolate', 'fileService'];
 
-  function recordDistributionService(_, $q, $http, API, $interpolate) {
+  function recordDistributionService(_, $q, $interpolate, fileService) {
     var service = {
       getChartData: getChartData,
     };
@@ -18,21 +18,11 @@
      */
     function getIconFile(iri, id, mimeType) {
       var defer = $q.defer();
-      $http.get(API.BASE + 'files/' + id, {
-        responseType: 'arraybuffer',
-        headers: {
-          'Accept': 'application/octet-stream'
-        }
-      }).then(function (response) {
-        var blob = new Blob([response.data],
-          {
-            type: mimeType
-          });
-        var reader = new FileReader();
-        reader.readAsDataURL(blob);
+      fileService.getImageFile(id, mimeType).then(function (response) {
         var config = {};
-        reader.onloadend = function () {
-          config[iri] = reader.result;
+        response.reader.readAsDataURL(response.blob);
+        response.reader.onloadend = function () {
+          config[iri] = response.reader.result;
           defer.resolve(config);
         };
       }, function (error) {
@@ -56,21 +46,20 @@
      * This method is responsible for forming chart data for rendering.
      *
      */
-    function getChartData(entity, config, records, iconDataCollection) {
+    function getChartData(entity, config, records, recordCollection) {
       var chartData = { 'data': [], 'edges': [] };
       var defer = $q.defer();
       if (config.pickListField && (config.pickListFieldItems && config.pickListFieldItems.length > 0) && records.length > 0) {
         let picklistMap = _getPicklistMap(config.pickListFieldItems);
         let iconMap = {};
         var promises = [];
-        iconDataCollection.forEach(function (iconData) {
-          if (iconData.icon) {
-            var promise = getIconFile(iconData['@id'], iconData.icon.id, iconData.icon.mimeType);
+        recordCollection.forEach(function (record) {
+          if (record.icon) {
+            var promise = getIconFile(record['@id'], record.icon.id, record.icon.mimeType);
             promises.push(promise);
           }
         });
         $q.all(promises).then(function (response) {
-          console.log('File download Response: ', response);
           iconMap = response.reduce(((r, c) => Object.assign(r, c)), {});
           // Form initial list of pick list items and color
           angular.forEach(config.pickListFieldItems, function (fieldItem) {
