@@ -43,7 +43,7 @@
     /*
      * The purpose of this initialize method is to create module list for populate
      * on configuration screen.
-     * For Dahboard or Reports, all modules are listed for selection.
+     * For Dashboard or Reports, all modules are listed for selection.
      * For View panel, only related modules of selected records are listed.
      */
     function _init() {

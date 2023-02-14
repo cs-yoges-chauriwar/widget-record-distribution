@@ -168,19 +168,23 @@
       Modules.get(params).$promise.then(function (data) {
         iconDataCollections = data['hydra:member'];
       }).finally(function () {
-        chartData = recordDistributionService.getChartData(entity, _config, records, iconDataCollections);
-        ViewTemplateService.getSystemViewTemplates('', 'settings').then(function (response) {
-          if (response.data['hydra:member'].length > 0) {
-            _.each(response.data['hydra:member'], function (setting) {
-              var moduleType = setting.uuid.split('-')[1];
-              if (_config.resource === moduleType && setting.config && setting.config.correlationConfig && setting.config.correlationConfig.$image) {
-                $scope.defaultImg = setting.config.correlationConfig.$image;
-              }
-            });
-          }
+        recordDistributionService.getChartData(entity, _config, records, iconDataCollections).then(function (response) {
+          chartData = response;
+
         }).finally(function () {
-          renderDistributionChart();
-          $scope.processing = false;
+          ViewTemplateService.getSystemViewTemplates('', 'settings').then(function (response) {
+            if (response.data['hydra:member'].length > 0) {
+              _.each(response.data['hydra:member'], function (setting) {
+                var moduleType = setting.uuid.split('-')[1];
+                if (_config.resource === moduleType && setting.config && setting.config.correlationConfig && setting.config.correlationConfig.$image) {
+                  $scope.defaultImg = setting.config.correlationConfig.$image;
+                }
+              });
+            }
+          }).finally(function () {
+            renderDistributionChart();
+            $scope.processing = false;
+          });
         });
       });
     }
@@ -440,7 +444,7 @@
             return categoryWidth + 20 + i * 150 + 60; // Middle of Image
           })
           .attr('y', function (d, i) {
-            return index * (categoryHeight) + (categoryHeight / 2) + 20; // For labelling below circle
+            return index * (categoryHeight) + (categoryHeight / 2) + 20; // For labelling below image
           })
           .attr('font-size', 11)
           .attr('width', 150)
