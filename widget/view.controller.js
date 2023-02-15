@@ -166,11 +166,10 @@
         __selectFields: '@id,icon'
       };
       Modules.get(params).$promise.then(function (data) {
-        iconDataCollections = data['hydra:member'];
+        iconDataCollections = data['hydra:member'] ? data['hydra:member'] : [];
       }).finally(function () {
         recordDistributionService.getChartData(entity, _config, records, iconDataCollections).then(function (response) {
           chartData = response;
-
         }).finally(function () {
           ViewTemplateService.getSystemViewTemplates('', 'settings').then(function (response) {
             if (response.data['hydra:member'].length > 0) {
