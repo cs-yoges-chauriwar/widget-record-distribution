@@ -38,4 +38,3 @@ The following image displays the Record Distribution widget based on our example
 <img src="https://raw.githubusercontent.com/fortinet-fortisoar/widget-record-distribution/release/1.0.0/docs/media/RecordDistributionModuleView.png" alt="Displaying the Alert Distribution widget on a Asset record" style="border: 1px solid #A9A9A9; border-radius: 4px; padding: 10px; display: block; margin-left: auto; margin-right: auto;">
 
 **Note**: If the asset record does not have any linked alerts, then the Record Distribution widget will display a '**No records found!**' message.
-
