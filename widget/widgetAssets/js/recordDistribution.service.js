@@ -79,7 +79,10 @@
             }
             angular.forEach(itemRecords, function (itemRecord) {
               var recordJson = {};
-              recordJson.name = $interpolate(entity.displayTemplate)(itemRecord);
+              recordJson.name = $interpolate('{{ ' + config.titleField + ' }}')(itemRecord);
+              if (recordJson.name && recordJson.name === '') {
+                recordJson.name = $interpolate(entity.displayTemplate)(itemRecord);
+              }
               recordJson.id = itemRecord.id;
               recordJson.uuid = itemRecord.uuid;
               recordJson.image = itemRecord[config.iconField] && iconMap[itemRecord[config.iconField]] ? iconMap[itemRecord[config.iconField]] : null;

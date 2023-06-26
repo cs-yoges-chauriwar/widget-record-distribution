@@ -128,6 +128,7 @@
 
       if (entity) {
         var displayFieldKeys = CommonUtils.getDisplayTemplateKey(entity.displayTemplate);
+        displayFieldKeys.push(_config.titleField)
         var selectFields = displayFieldKeys.concat(['@id', 'uuid', _config.pickListField, _config.iconField]);
         _config.query.relationships = _config.showCorrelation;
         _config.query.__selectFields = _config.showCorrelation ? selectFields.concat([_config.resource]) : selectFields;

@@ -87,6 +87,9 @@
         if ($scope.config.pickListField) {
           getPicklistItems();
         }
+        $scope.titleFields = _.filter($scope.fieldsArray, function (field) {
+          return field.type === 'text';
+        });
         $scope.fields = entity.getFormFields();
         angular.extend($scope.fields, entity.getRelationshipFields());
       });

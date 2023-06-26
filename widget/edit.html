@@ -67,6 +67,20 @@
       </select>
       <div data-cs-messages="editRecordDistributionForm.iconField"></div>
     </div>
+    <div class="form-group"
+      data-ng-class="{ 'has-error': editRecordDistributionForm.titleField.$invalid && editRecordDistributionForm.titleField.$touched }"
+      data-ng-if="modules">
+      <label for="titleField" class="control-label">Title for Record View<span class="text-danger">*</span></label>
+      <span data-uib-tooltip="Provide title field to display on." data-tooltip-append-to-body="true">
+        <i class="margin-left-sm icon icon-information font-Size-13"></i>
+      </span>
+      <select name="titleField" id="titleField" class="form-control"
+        data-ng-options="field.name as field.title for field in titleFields"
+        data-ng-model="config.titleField" required>
+        <option value="">Select an Option</option>
+      </select>
+      <div data-cs-messages="editRecordDistributionForm.titleField"></div>
+    </div>
     <div class="padding-top-lg form-horizontal checkbox">
       <label for="showCorrelation">
         <input id="showCorrelation" type="checkbox" name="showCorrelation" data-ng-model="config.showCorrelation">Show
