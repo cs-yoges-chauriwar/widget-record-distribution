@@ -2,11 +2,11 @@
 (function () {
   angular
     .module('cybersponse')
-    .controller('editRecordDistribution100Ctrl', editRecordDistribution100Ctrl);
+    .controller('editRecordDistribution101Ctrl', editRecordDistribution101Ctrl);
 
-  editRecordDistribution100Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity', 'FormEntityService'];
+  editRecordDistribution101Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity', 'FormEntityService'];
 
-  function editRecordDistribution100Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity, FormEntityService) {
+  function editRecordDistribution101Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity, FormEntityService) {
     $scope.cancel = cancel;
     $scope.save = save;
     $scope.page = $state.params.page;

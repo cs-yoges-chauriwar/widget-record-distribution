@@ -2,11 +2,11 @@
 (function () {
   angular
     .module('cybersponse')
-    .controller('recordDistribution100Ctrl', recordDistribution100Ctrl);
+    .controller('recordDistribution101Ctrl', recordDistribution101Ctrl);
 
-  recordDistribution100Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
+  recordDistribution101Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
 
-  function recordDistribution100Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
+  function recordDistribution101Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
     var entity = null;
     var chartData = { 'data': [], 'edges': [] };
     var _config = angular.copy(config);
@@ -484,6 +484,7 @@
 
     entity = new Entity(config.resource);
     if (entity) {
+      console.log('Record Distribution entity', entity)
       entity.loadFields().then(function () {
         _init();
       });
