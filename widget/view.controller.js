@@ -484,7 +484,6 @@
 
     entity = new Entity(config.resource);
     if (entity) {
-      console.log('Record Distribution entity', entity)
       entity.loadFields().then(function () {
         _init();
       });
