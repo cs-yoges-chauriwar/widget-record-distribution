@@ -79,8 +79,13 @@
             }
             angular.forEach(itemRecords, function (itemRecord) {
               var recordJson = {};
-              recordJson.name = $interpolate('{{ ' + config.titleField + ' }}')(itemRecord);
-              if (recordJson.name && recordJson.name === '') {
+              if (config.titleField) {
+                recordJson.name = $interpolate('{{ ' + config.titleField + ' }}')(itemRecord);
+                if (recordJson.name && recordJson.name === '') {
+                  recordJson.name = $interpolate(entity.displayTemplate)(itemRecord);
+                }
+              }
+              else {
                 recordJson.name = $interpolate(entity.displayTemplate)(itemRecord);
               }
               recordJson.id = itemRecord.id;
