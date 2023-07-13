@@ -1,4 +1,3 @@
-# Features
+# What's New
 
-## Enhancement
-- Allows record title field configurable.
+- Record title field is now configurable
