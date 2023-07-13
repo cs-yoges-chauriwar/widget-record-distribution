@@ -1,8 +1,8 @@
 # Release Information
 
-- **Version**: 1.0.0 <sup>Preview</sup>
+- **Version**: 1.0.1
 
-- **Certified**: No
+- **Certified**: Yes
 
 - **Publisher**: Fortinet  
 
@@ -12,13 +12,16 @@
 
 - [Release Notes](./widget/release_notes.md)
 
-**Note**: Preview releases are a beta release. This means that release is intended to get feedback and might not be best suited for production level deployments. The functionality might change in backward-incompatible ways or have limited support. A beta release is not subject to any SLA, Quality Assurance or deprecation policy. Feature availability and support for preview releases will continue to improve as the solution/feature matures.
 
 # Overview
 
-The Record Distribution widget provides the ability to visualise records or items based on a specified grouping. For example, viewing the distribution of assets by purdue levels, or the distribution of alerts by type, severity, etc.
+Introducing our powerful **Record Distribution** widget - a dynamic and intuitive tool designed to enhance your data visualization experience. This widget empowers you to effortlessly analyze and understand your records or items by employing a customizable grouping feature. Unveil invaluable insights by visually exploring the distribution of assets based on Purdue levels, or delve into the frequency of alerts categorized by type, severity, and more.
+
+With its user-friendly interface, you can swiftly toggle between various grouping criteria, allowing for quick comparisons and trend identification. Uncover patterns, anomalies, and opportunities hidden within your data. Seamlessly integrate it into your existing data analysis workflows and unlock the true potential of your records.
+
+Utilize the widget's picklist grouping feature, like *Levels* in the **Assets** module, to group records and gain a comprehensive overview of assets at each level. This powerful tool not only  allows you to seamlessly integrate the view into dashboards, reports, or the detailed view of a module's record but also presents a visual depiction of each record node within the group. Uncover valuable insights and make data-driven decisions with ease using the Record Distribution widget.
 
 ## Next Steps
 
-| [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) | [Contents](./docs/contents.md) |
-|----------------------------------------------|------------------------------------------------|--------------------------|--------------------------------|
+| [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) |
+|----------------------------------------------|------------------------------------------------|--------------------------|
