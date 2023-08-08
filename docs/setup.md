@@ -17,14 +17,14 @@ In the case of dashboards or reports, you can choose any module and view its rec
 Following table helps customize the **Record Distribution** widget:
 
 | Fields                                     | Description                                                                                                                                                                                                                     |
-|--------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Title                                      | Specify a title for the visual depiction of each record node in the group.                                                                                                                                                      |
 | Select Data Source (Dashboards or Reports) | Select the module whose records to group in a *Dashboard* or A *Report*.                                                                                                                                                        |
 | Select Related Data Source (View Panels)   | Select the related module whose records to group in *View Panels*.                                                                                                                                                              |
 | Picklist                                   | Select the picklist using which to group the records in the selected module.                                                                                                                                                    |
 | Picklist Items                             | Choose the picklist items to be displayed by the widget.                                                                                                                                                                        |
 | Icon for Record View                       | Select a field of type `Lookup` using which to display the icons representing asset records. For more information, refer to [set up modules to use icons that represent records](#setting-up-modules-to-use-icons-for-records). |
-| Title for Record View                      | Specify title that appears under each icon in the Record distribution widget. You can configure the title widget to display values such as the *Name* or *IP address*.                                                          |
+| Title for Record View <sup>New</sup>       | Specify title that appears under each icon in the Record distribution widget. You can configure the title widget to display values such as the *Name* or *IP address*.                                                          |
 | Show Correlation Edges                     | Select this option to add visual lines on the view to depict correlations between records from the same module grouped at various levels.                                                                                       |
 | Record Assignment (Default Filter)         | Select to display records that are assigned to the logged-in user or to display all records based on the defined filters.                                                                                                       |
 | Assignment Fields                          | Select the field based on which records are assigned for the select module.                                                                                                                                                     |
@@ -55,7 +55,7 @@ For the purposes of this document, as an example, we are going to:
 2. Create a new field **Icon Name** containing unique names for icons to use.
 
     | Field Name    | Value        |
-    |---------------|--------------|
+    | ------------- | ------------ |
     | `Field Type`  | *Text*       |
     | `Sub Type`    | *Text Field* |
     | `Field Title` | *Icon Name*  |
@@ -63,14 +63,14 @@ For the purposes of this document, as an example, we are going to:
 3. Create another field **Icon**. This field stores the actual icons.
 
     | Field Name    | Value        |
-    |---------------|--------------|
+    | ------------- | ------------ |
     | `Field Type`  | *File Field* |
     | `Field Title` | *Icon*       |
 
 4. Create another field **Description**. This field contains some description about the module.
 
     | Field Name    | Value         |
-    |---------------|---------------|
+    | ------------- | ------------- |
     | `Field Type`  | *Text*        |
     | `Sub Type`    | *Text Field*  |
     | `Field Title` | *Description* |
@@ -119,7 +119,7 @@ Refer to [Modifying the Navigation bar](https://docs.fortinet.com/document/forti
 2. Create a new field **Asset Icon** within the **Asset Module**.
 
     | Field Name       | Value                                |
-    |------------------|--------------------------------------|
+    | ---------------- | ------------------------------------ |
     | `Field Type`     | *Lookup (One to Many or One to One)* |
     | `Related Module` | *Asset Icons*                        |
     | `Field Title`    | *Asset Icon*                         |

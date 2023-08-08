@@ -2,7 +2,7 @@
 
 - **Version**: 1.0.1
 
-- **Certified**: Yes
+- **Certified**: No
 
 - **Publisher**: Fortinet  
 
@@ -24,4 +24,4 @@ Utilize the widget's picklist grouping feature, like *Levels* in the **Assets** 
 ## Next Steps
 
 | [Installation](./docs/setup.md#installation) | [Configuration](./docs/setup.md#configuration) | [Usage](./docs/usage.md) |
-|----------------------------------------------|------------------------------------------------|--------------------------|
+| -------------------------------------------- | ---------------------------------------------- | ------------------------ |
