@@ -2,11 +2,11 @@
 (function () {
   angular
     .module('cybersponse')
-    .controller('recordDistribution101Ctrl', recordDistribution101Ctrl);
+    .controller('recordDistribution102Ctrl', recordDistribution102Ctrl);
 
-  recordDistribution101Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
+  recordDistribution102Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
 
-  function recordDistribution101Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
+  function recordDistribution102Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
     var entity = null;
     var chartData = { 'data': [], 'edges': [] };
     var _config = angular.copy(config);
