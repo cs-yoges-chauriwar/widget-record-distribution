@@ -124,11 +124,6 @@
     }
 
     function save() {
-      if ($scope.editRecordDistributionForm.$invalid) {
-        $scope.editRecordDistributionForm.$setTouched();
-        $scope.editRecordDistributionForm.$focusOnFirstError();
-        return;
-      }
       $uibModalInstance.close($scope.config);
     }
 

@@ -17,11 +17,7 @@
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.resource.$invalid && editRecordDistributionForm.resource.$touched }"
       data-ng-if="modules">
-      <label for="resource" class="control-label">{{ sourceLabel }}<span class="text-danger">*</span>
-        <span data-uib-tooltip="Select the module whose records are to be grouped." data-tooltip-append-to-body="true">
-          <i class="margin-left-sm icon icon-information font-Size-13"></i>
-        </span>
-      </label>
+      <label for="resource" class="control-label">{{ sourceLabel }}<span class="text-danger">*</span></label>
       <select name="resource" id="resource" class="form-control"
         data-ng-options="module.type as module.name for module in modules" data-ng-model="config.resource"
         data-ng-change="loadAttributes()" required>
@@ -32,11 +28,7 @@
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.pickListField.$invalid && editRecordDistributionForm.pickListField.$touched }"
       data-ng-if="modules">
-      <label for="pickListField" class="control-label">Picklist<span class="text-danger">*</span>
-        <span data-uib-tooltip="Select the picklist to group the records in the selected module." data-tooltip-append-to-body="true">
-          <i class="margin-left-sm icon icon-information font-Size-13"></i>
-        </span>
-      </label>
+      <label for="pickListField" class="control-label">Picklist<span class="text-danger">*</span></label>
       <select name="pickListField" id="pickListField" class="form-control"
         data-ng-options="field.name as field.title for field in pickListFields | orderBy: 'title'"
         data-ng-model="config.pickListField" data-ng-change="updatePicklistItems()" required>
@@ -47,11 +39,7 @@
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.pickListFieldItems.$invalid && editRecordDistributionForm.pickListFieldItems.$touched }"
       data-ng-if="modules">
-      <label for="pickListFieldItems" class="control-label">Picklist Items<span class="text-danger">*</span>
-        <span data-uib-tooltip="Choose the picklist items to be displayed by the widget." data-tooltip-append-to-body="true">
-          <i class="margin-left-sm icon icon-information font-Size-13"></i>
-        </span>
-      </label>
+      <label for="pickListFieldItems" class="control-label">Picklist Items<span class="text-danger">*</span></label>
       <div class="cs-select">
         <ui-select name="pickListFieldItems" data-ng-model="config.pickListFieldItems" required multiple
           class="custom-multi-select" tagging="undefined" tagging-label="false">
