@@ -12,7 +12,7 @@
             "View Panel",
             "Reports"
         ],
-        "certified": "No",
+        "certified": "Yes",
         "publisher": "Fortinet",
         "snapshots": [
             "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.2\/images\/record-distribution-settings.png",
