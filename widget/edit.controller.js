@@ -2,11 +2,11 @@
 (function () {
   angular
     .module('cybersponse')
-    .controller('editRecordDistribution101Ctrl', editRecordDistribution101Ctrl);
+    .controller('editRecordDistribution102Ctrl', editRecordDistribution102Ctrl);
 
-  editRecordDistribution101Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity', 'FormEntityService'];
+  editRecordDistribution102Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity', 'FormEntityService'];
 
-  function editRecordDistribution101Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity, FormEntityService) {
+  function editRecordDistribution102Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity, FormEntityService) {
     $scope.cancel = cancel;
     $scope.save = save;
     $scope.page = $state.params.page;
@@ -124,8 +124,12 @@
     }
 
     function save() {
+      if ($scope.editRecordDistributionForm.$invalid) {
+        $scope.editRecordDistributionForm.$setTouched();
+        $scope.editRecordDistributionForm.$focusOnFirstError();
+        return;
+      }
       $uibModalInstance.close($scope.config);
     }
-
   }
 })();

@@ -1,8 +1,8 @@
 {
     "name": "recordDistribution",
     "title": "Record Distribution",
-    "subTitle": "Ability to visualise items/records and their correlations in different levels based on a given grouping context. A very good example of the widget's utility is the OT view, where assets are visualised across different Purdue Levels and highlight any existing relations with other assets at different levels.",
-    "version": "1.0.1",
+    "subTitle": "Ability to visualize items/records and their correlations in different levels based on a given grouping context.",
+    "version": "1.0.2",
     "published_date": 1675382400,
     "releaseNotes": "available",
     "metadata": {
@@ -12,13 +12,13 @@
             "View Panel",
             "Reports"
         ],
-        "certified": "No",
+        "certified": "Yes",
         "publisher": "Fortinet",
         "snapshots": [
-            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.1\/images\/record-distribution-settings.png",
-            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.1\/images\/record-distribution.png"
+            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.2\/images\/record-distribution-settings.png",
+            "https:\/\/repo.fortisoar.fortinet.com\/fsr-widgets\/recordDistribution-1.0.2\/images\/record-distribution.png"
         ],
-        "help_online": "https:\/\/github.com\/fortinet-fortisoar\/widget-record-distribution\/blob\/release\/1.0.1\/README.md",
+        "help_online": "https:\/\/github.com\/fortinet-fortisoar\/widget-record-distribution\/blob\/release\/1.0.2\/README.md",
         "compatibility": [
             "7.2.2"
         ]

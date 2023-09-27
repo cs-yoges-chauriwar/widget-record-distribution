@@ -1,3 +1,8 @@
-# What's New
+### What's New
 
-- Record title field is now configurable
+- This widget is now **Certified**
+
+- Following fields now have a tooltip for enhanced understanding and providing input to these fields is now mandatory:
+  - Data Source
+  - Picklist
+  - Picklist Items
