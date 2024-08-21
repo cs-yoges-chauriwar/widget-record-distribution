@@ -2,11 +2,11 @@
 (function () {
   angular
     .module('cybersponse')
-    .controller('recordDistribution102Ctrl', recordDistribution102Ctrl);
+    .controller('recordDistribution103Ctrl', recordDistribution103Ctrl);
 
-  recordDistribution102Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
+  recordDistribution103Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
 
-  function recordDistribution102Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
+  function recordDistribution103Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
     var entity = null;
     var chartData = { 'data': [], 'edges': [] };
     var _config = angular.copy(config);
@@ -346,10 +346,11 @@
             operator: 'eq'
           };
           query.filters = query.filters.concat(addFilter);
-          var _q = { filters: $scope._minify(query.filters), logic: query.logic };
+          var widgetQuery = new Query();
+          widgetQuery.widgetQuery = { filters: $scope._minify(query.filters), logic: query.logic };
           $state.go('main.modules.list', {
             module: _config.resource,
-            query: encodeURIComponent(JSON.stringify(_q)),
+            query: encodeURIComponent(JSON.stringify(widgetQuery)),
             qparam: $state.params.qparam
           });
         });
