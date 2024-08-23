@@ -1,8 +1,5 @@
 ### What's New
 
-- This widget is now **Certified**
+- Localization Support added for Japanese, Korean & Simplified Chinese languages.
 
-- Following fields now have a tooltip for enhanced understanding and providing input to these fields is now mandatory:
-  - Data Source
-  - Picklist
-  - Picklist Items
+- Widget Filter retained with grid filter on module listing page, when redirected from the Widget through 'View All Records' option.
