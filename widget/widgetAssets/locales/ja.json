@@ -1,0 +1,32 @@
+{
+  "recordDistribution": {
+    "BTN_CLOSE": "閉じる",
+    "BTN_SAVE": "保存",
+    "CHK_BOX_SHOW_CO_REL_EDGES": "相関エッジを表示",
+    "DATA_SOURCE_LABEL": "データソース",
+    "HEADER_REC_DIS_EDIT_VIEW": "レコード分布編集ビュー",
+    "LABEL_ASSIGNMENT_FIELD": "割り当てフィールド",
+    "LABEL_CLOSE": "閉じる",
+    "LABEL_FILTER_CRITERIA": "フィルター条件",
+    "LABEL_ICON_RECORD_VIEW": "レコードビューのアイコン",
+    "LABEL_PICKLIST": "選択リスト",
+    "LABEL_PICKLIST_ITEMS": "選択リスト項目",
+    "LABEL_REC_ASGMT": "レコード割り当て (デフォルトフィルター)",
+    "LABEL_TITLE": "タイトル",
+    "LABEL_TITLE_RECORD_VIEW": "レコードビューのタイトル",
+    "OPTION_ALL": "すべて",
+    "OPTION_ONLY_ME": "自分のみ",
+    "PLACEHOLDER_SELECT_MODULE": "モジュールを選択",
+    "RELATED_DATA_SOURCE_LABEL": "関連データソースを選択",
+    "SELECT_AN_OPTION": "オプションを選択",
+    "SELECT_FIELD": "フィールドを選択",
+    "TOOLTIP_ICON_RECORD_VIEW": "レコードアイコンに関連する検索フィールドを指定してください",
+    "TOOLTIP_PICKLIST": "選択されたモジュールでレコードをグループ化する選択リストを選択します。",
+    "TOOLTIP_PICKLIST_ITEMS": "ウィジェットに表示する選択リスト項目を選択します。",
+    "TOOLTIP_SHOW_CO_REL_EDGES": "レコード間の相関を線で表示します",
+    "TOOLTIP_SOURCE_LABEL": "グループ化するレコードのあるモジュールを選択します。",
+    "TOOLTIP_TITLE_RECORD_VIEW": "表示するタイトルフィールドを指定してください。",
+    "TXT_NO_RECS_FOUND": "レコードが見つかりません！",
+    "TXT_VIEW_ALL_RECS": "すべてのレコードを表示"
+  }
+}

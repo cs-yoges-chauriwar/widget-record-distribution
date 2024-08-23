@@ -1,0 +1,32 @@
+{
+  "recordDistribution": {
+    "BTN_CLOSE": "Close",
+    "BTN_SAVE": "Save",
+    "CHK_BOX_SHOW_CO_REL_EDGES": "Show Correlation Edges",
+    "DATA_SOURCE_LABEL": "Data Source",
+    "HEADER_REC_DIS_EDIT_VIEW": "Record Distribution Edit View",
+    "LABEL_ASSIGNMENT_FIELD": "Assignment Field",
+    "LABEL_CLOSE": "Close",
+    "LABEL_FILTER_CRITERIA": "Filter Criteria",
+    "LABEL_ICON_RECORD_VIEW": "Icon for Record View",
+    "LABEL_PICKLIST": "Picklist",
+    "LABEL_PICKLIST_ITEMS": "Picklist Items",
+    "LABEL_REC_ASGMT": "Record Assignment (Default Filter)",
+    "LABEL_TITLE": "Title",
+    "LABEL_TITLE_RECORD_VIEW": "Title for Record View",
+    "OPTION_ALL": "All",
+    "OPTION_ONLY_ME": "Only Me",
+    "PLACEHOLDER_SELECT_MODULE": "Select Module",
+    "RELATED_DATA_SOURCE_LABEL": "Select Related Data Source",
+    "SELECT_AN_OPTION": "Select an Option",
+    "SELECT_FIELD": "Select a field",
+    "TOOLTIP_ICON_RECORD_VIEW": "Provide lookup field associated with the record icon",
+    "TOOLTIP_PICKLIST": "Select the picklist to group the records in the selected module.",
+    "TOOLTIP_PICKLIST_ITEMS": "Choose the picklist items to be displayed by the widget.",
+    "TOOLTIP_SHOW_CO_REL_EDGES": "Shows the correlations within the records as lines",
+    "TOOLTIP_SOURCE_LABEL": "Select the module whose records are to be grouped.",
+    "TOOLTIP_TITLE_RECORD_VIEW": "Provide title field to display on.",
+    "TXT_NO_RECS_FOUND": "No records found !",
+    "TXT_VIEW_ALL_RECS": "View All Records"
+  }
+}

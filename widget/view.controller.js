@@ -4,9 +4,9 @@
     .module('cybersponse')
     .controller('recordDistribution103Ctrl', recordDistribution103Ctrl);
 
-  recordDistribution103Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules'];
+  recordDistribution103Ctrl.$inject = ['$scope', '$rootScope', 'config', '$state', '_', 'Entity', 'localStorageService', 'Query', 'API', '$resource', 'recordDistributionService', 'ViewTemplateService', 'appModulesService', '$interpolate', 'CommonUtils', 'Modules', 'widgetUtilityService'];
 
-  function recordDistribution103Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules) {
+  function recordDistribution103Ctrl($scope, $rootScope, config, $state, _, Entity, localStorageService, Query, API, $resource, recordDistributionService, ViewTemplateService, appModulesService, $interpolate, CommonUtils, Modules, widgetUtilityService) {
     var entity = null;
     var chartData = { 'data': [], 'edges': [] };
     var _config = angular.copy(config);
@@ -19,10 +19,23 @@
       $scope.page = $state.params.page;
     }
 
+    function _handleTranslations() {
+      widgetUtilityService.checkTranslationMode($scope.$parent.model.type).then(function () {
+        $scope.viewWidgetVars = {
+          // Create your translating static string variables here
+          'TXT_NO_RECS_FOUND': widgetUtilityService.translate('recordDistribution.TXT_NO_RECS_FOUND'),
+          'TXT_VIEW_ALL_RECS': widgetUtilityService.translate('recordDistribution.TXT_VIEW_ALL_RECS')
+        };
+      });
+    }
+
     /*
      * This method initialize required attributes, retrives icon field lookup modules.
      */
     function _init() {
+      // To handle backward compatibility for widget
+      _handleTranslations();
+
       if (entity) {
         var assignedToPerson = config.mapping.assignedToPerson;
         if (!angular.isUndefined(assignedToPerson) && !angular.isUndefined(entity.fields[assignedToPerson])) {
@@ -264,7 +277,7 @@
           .attr('fill', backgroundColor);
 
         svg.append('text')
-          .text('No records found !')
+          .text($scope.viewWidgetVars.TXT_NO_RECS_FOUND)
           .attr('x', 20)
           .attr('y', 30)
           .attr('font-size', 16)
@@ -357,7 +370,7 @@
 
       // View All Records Image Title
       viewMoreImage.append('title')
-        .text('View All Records');
+        .text($scope.viewWidgetVars.TXT_VIEW_ALL_RECS);
 
       // Category Text Rendering
       categoryRect.append('text')
