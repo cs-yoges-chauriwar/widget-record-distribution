@@ -1,8 +1,8 @@
 <form data-ng-submit="save()" class="noMargin" name="editRecordDistributionForm"
   data-ng-class="{'state-wait': processing }" novalidate>
   <div class="modal-header">
-    <h3 class="modal-title col-md-9">Record Distribution Edit View</h3>
-    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal" aria-label="Close"
+    <h3 class="modal-title col-md-9">{{ viewWidgetVars.HEADER_REC_DIS_EDIT_VIEW }}</h3>
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal" aria-label="{{ viewWidgetVars.LABEL_CLOSE }}"
       id="close-edit-widget-form-btn">
       <div aria-hidden="true" class="version-button">+</div>
     </button>
@@ -10,7 +10,7 @@
   <div class="modal-body">
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.title.$invalid && editRecordDistributionForm.title.$touched }">
-      <label for="title" class="control-label">Title<span class="text-danger">*</span></label>
+      <label for="title" class="control-label">{{ viewWidgetVars.LABEL_TITLE }}<span class="text-danger">*</span></label>
       <input id="title" name="title" type="text" class="form-control" data-ng-model="config.title" required>
       <div data-cs-messages="editRecordDistributionForm.title"></div>
     </div>
@@ -18,44 +18,44 @@
       data-ng-class="{ 'has-error': editRecordDistributionForm.resource.$invalid && editRecordDistributionForm.resource.$touched }"
       data-ng-if="modules">
       <label for="resource" class="control-label">{{ sourceLabel }}<span class="text-danger">*</span>
-        <span data-uib-tooltip="Select the module whose records are to be grouped." data-tooltip-append-to-body="true">
+        <span data-uib-tooltip="{{ viewWidgetVars.TOOLTIP_SOURCE_LABEL }}" data-tooltip-append-to-body="true">
           <i class="margin-left-sm icon icon-information font-Size-13"></i>
         </span>
       </label>
       <select name="resource" id="resource" class="form-control"
         data-ng-options="module.type as module.name for module in modules" data-ng-model="config.resource"
         data-ng-change="loadAttributes()" required>
-        <option value="">Select an Option</option>
+        <option value="">{{ viewWidgetVars.SELECT_AN_OPTION }}</option>
       </select>
       <div data-cs-messages="editRecordDistributionForm.resource"></div>
     </div>
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.pickListField.$invalid && editRecordDistributionForm.pickListField.$touched }"
       data-ng-if="modules">
-      <label for="pickListField" class="control-label">Picklist<span class="text-danger">*</span>
-        <span data-uib-tooltip="Select the picklist to group the records in the selected module." data-tooltip-append-to-body="true">
+      <label for="pickListField" class="control-label">{{ viewWidgetVars.LABEL_PICKLIST }}<span class="text-danger">*</span>
+        <span data-uib-tooltip="{{ viewWidgetVars.TOOLTIP_PICKLIST }}" data-tooltip-append-to-body="true">
           <i class="margin-left-sm icon icon-information font-Size-13"></i>
         </span>
       </label>
       <select name="pickListField" id="pickListField" class="form-control"
         data-ng-options="field.name as field.title for field in pickListFields | orderBy: 'title'"
         data-ng-model="config.pickListField" data-ng-change="updatePicklistItems()" required>
-        <option value="">Select an Option</option>
+        <option value="">{{ viewWidgetVars.SELECT_AN_OPTION }}</option>
       </select>
       <div data-cs-messages="editRecordDistributionForm.pickListField"></div>
     </div>
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.pickListFieldItems.$invalid && editRecordDistributionForm.pickListFieldItems.$touched }"
       data-ng-if="modules">
-      <label for="pickListFieldItems" class="control-label">Picklist Items<span class="text-danger">*</span>
-        <span data-uib-tooltip="Choose the picklist items to be displayed by the widget." data-tooltip-append-to-body="true">
+      <label for="pickListFieldItems" class="control-label">{{ viewWidgetVars.LABEL_PICKLIST_ITEMS }}<span class="text-danger">*</span>
+        <span data-uib-tooltip="{{ viewWidgetVars.TOOLTIP_PICKLIST_ITEMS }}" data-tooltip-append-to-body="true">
           <i class="margin-left-sm icon icon-information font-Size-13"></i>
         </span>
       </label>
       <div class="cs-select">
         <ui-select name="pickListFieldItems" data-ng-model="config.pickListFieldItems" required multiple
           class="custom-multi-select" tagging="undefined" tagging-label="false">
-          <ui-select-match placeholder="Select Module">{{$item.itemValue}}</ui-select-match>
+          <ui-select-match placeholder="{{ viewWidgetVars.PLACEHOLDER_SELECT_MODULE }}">{{$item.itemValue}}</ui-select-match>
           <ui-select-choices repeat="option in pickListFieldItems | filter: $select.search" refresh-delay="0"
             ng-show="($select.items.length >= 0) || ">
             <div ng-bind="option.itemValue"></div>
@@ -68,58 +68,57 @@
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.iconField.$invalid && editRecordDistributionForm.iconField.$touched }"
       data-ng-if="modules">
-      <label for="iconField" class="control-label">Icon for Record View<span class="text-danger">*</span></label>
-      <span data-uib-tooltip="Provide lookup field associated with the record icon" data-tooltip-append-to-body="true">
+      <label for="iconField" class="control-label">{{ viewWidgetVars.LABEL_ICON_RECORD_VIEW }}<span class="text-danger">*</span></label>
+      <span data-uib-tooltip="{{ viewWidgetVars.TOOLTIP_ICON_RECORD_VIEW }}" data-tooltip-append-to-body="true">
         <i class="margin-left-sm icon icon-information font-Size-13"></i>
       </span>
       <select name="iconField" id="iconField" class="form-control"
         data-ng-options="field.name as field.title for field in iconFields | orderBy: 'title'"
         data-ng-model="config.iconField" required>
-        <option value="">Select an Option</option>
+        <option value="">{{ viewWidgetVars.SELECT_AN_OPTION }}</option>
       </select>
       <div data-cs-messages="editRecordDistributionForm.iconField"></div>
     </div>
     <div class="form-group"
       data-ng-class="{ 'has-error': editRecordDistributionForm.titleField.$invalid && editRecordDistributionForm.titleField.$touched }"
       data-ng-if="modules">
-      <label for="titleField" class="control-label">Title for Record View<span class="text-danger">*</span></label>
-      <span data-uib-tooltip="Provide title field to display on." data-tooltip-append-to-body="true">
+      <label for="titleField" class="control-label">{{ viewWidgetVars.LABEL_TITLE_RECORD_VIEW }}<span class="text-danger">*</span></label>
+      <span data-uib-tooltip="{{ viewWidgetVars.TOOLTIP_TITLE_RECORD_VIEW }}" data-tooltip-append-to-body="true">
         <i class="margin-left-sm icon icon-information font-Size-13"></i>
       </span>
       <select name="titleField" id="titleField" class="form-control"
         data-ng-options="field.name as field.title for field in titleFields"
         data-ng-model="config.titleField" required>
-        <option value="">Select an Option</option>
+        <option value="">{{ viewWidgetVars.SELECT_AN_OPTION }}</option>
       </select>
       <div data-cs-messages="editRecordDistributionForm.titleField"></div>
     </div>
     <div class="padding-top-lg form-horizontal checkbox">
       <label for="showCorrelation">
-        <input id="showCorrelation" type="checkbox" name="showCorrelation" data-ng-model="config.showCorrelation">Show
-        Correlation Edges
+        <input id="showCorrelation" type="checkbox" name="showCorrelation" data-ng-model="config.showCorrelation">{{ viewWidgetVars.CHK_BOX_SHOW_CO_REL_EDGES }}
       </label>
-      <span data-uib-tooltip="Shows the correlations within the records as lines" data-tooltip-append-to-body="true">
+      <span data-uib-tooltip="{{ viewWidgetVars.TOOLTIP_SHOW_CO_REL_EDGES }}" data-tooltip-append-to-body="true">
         <i class="margin-left-sm icon icon-information font-Size-13"></i>
       </span>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="assignedToSetting" class="control-label">Record Assignment (Default Filter)</label>
+          <label for="assignedToSetting" class="control-label">{{ viewWidgetVars.LABEL_REC_ASGMT }}</label>
           <select class="form-control" name="assignedToSetting" id="assignedToSetting"
             ng-model="config.assignedToSetting">
-            <option value="onlyMe">Only Me</option>
-            <option value="all">All</option>
+            <option value="onlyMe">{{ viewWidgetVars.OPTION_ONLY_ME }}</option>
+            <option value="all">{{ viewWidgetVars.OPTION_ALL }}</option>
           </select>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="assignmentField" class="control-label">Assignment Field</label>
+          <label for="assignmentField" class="control-label">{{ viewWidgetVars.LABEL_ASSIGNMENT_FIELD }}</label>
           <select class="form-control" name="assignmentField" id="assignmentField"
             data-ng-options="field.name as field.title for field in userField | orderBy: 'title'"
             ng-model="config.mapping.assignedToPerson">
-            <option value="">Select a field</option>
+            <option value="">{{ viewWidgetVars.SELECT_FIELD }}</option>
           </select>
         </div>
       </div>
@@ -129,7 +128,7 @@
     <div data-ng-hide="!fieldsArray || fieldsArray.length === 0">
       <div class="form-group"
         data-ng-class="{ 'has-error': editRecordDistributionForm.filters.$invalid && editRecordDistributionForm.filters.$touched }">
-        <label for="filters" class="control-label">Filter Criteria</label>
+        <label for="filters" class="control-label">{{ viewWidgetVars.LABEL_FILTER_CRITERIA }}</label>
         <div data-cs-conditional data-ng-if="fieldsArray.length > 0" data-fields="$parent.fields"
           data-mode="'queryFilters'" data-ng-model="$parent.config.query" data-parent-form="editRecordDistributionForm"
           data-enable-expression="(page==='dashboard' || page==='reporting')" data-reset-field="$parent.fields"
@@ -140,8 +139,8 @@
   </div>
   <div class="modal-footer">
     <button id="edit-widget-save" type="submit" class="btn btn-sm btn-primary"><i
-        class="icon icon-check margin-right-sm"></i>Save</button>
+        class="icon icon-check margin-right-sm"></i>{{ viewWidgetVars.BTN_SAVE }}</button>
     <button id="edit-widget-cancel" type="button" class="btn btn-sm btn-default" data-ng-click="cancel()"><i
-        class="icon icon-close margin-right-sm"></i>Close</button>
+        class="icon icon-close margin-right-sm"></i>{{ viewWidgetVars.BTN_CLOSE }}</button>
   </div>
 </form>

@@ -2,18 +2,17 @@
 (function () {
   angular
     .module('cybersponse')
-    .controller('editRecordDistribution102Ctrl', editRecordDistribution102Ctrl);
+    .controller('editRecordDistribution103Ctrl', editRecordDistribution103Ctrl);
 
-  editRecordDistribution102Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity', 'FormEntityService'];
+  editRecordDistribution103Ctrl.$inject = ['$scope', '$uibModalInstance', 'config', 'appModulesService', '$state', 'Entity', 'FormEntityService', 'widgetUtilityService'];
 
-  function editRecordDistribution102Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity, FormEntityService) {
+  function editRecordDistribution103Ctrl($scope, $uibModalInstance, config, appModulesService, $state, Entity, FormEntityService, widgetUtilityService) {
     $scope.cancel = cancel;
     $scope.save = save;
     $scope.page = $state.params.page;
     $scope.loadAttributes = loadAttributes;
     $scope.updatePicklistItems = updatePicklistItems;
     $scope.isDetailView = $state.current.name && ($state.current.name.indexOf('viewPanel') !== -1);
-    $scope.sourceLabel = $scope.isDetailView ? 'Select Related Data Source' : 'Data Source';
 
     $scope.config = angular.extend({
       query: {
@@ -40,6 +39,48 @@
       $scope.loadAttributes();
     }
 
+    function _handleTranslations() {
+      let widgetNameVersion = widgetUtilityService.getWidgetNameVersion($scope.$resolve.widget, $scope.$resolve.widgetBasePath);
+      
+      if (widgetNameVersion) {
+        widgetUtilityService.checkTranslationMode(widgetNameVersion).then(function () {
+          $scope.viewWidgetVars = {
+            // Create your translating static string variables here
+            'BTN_CLOSE': widgetUtilityService.translate('recordDistribution.BTN_CLOSE'),
+            'BTN_SAVE': widgetUtilityService.translate('recordDistribution.BTN_SAVE'),
+            'CHK_BOX_SHOW_CO_REL_EDGES': widgetUtilityService.translate('recordDistribution.CHK_BOX_SHOW_CO_REL_EDGES'),
+            'DATA_SOURCE_LABEL': widgetUtilityService.translate('recordDistribution.DATA_SOURCE_LABEL'),
+            'HEADER_REC_DIS_EDIT_VIEW': widgetUtilityService.translate('recordDistribution.HEADER_REC_DIS_EDIT_VIEW'),
+            'LABEL_ASSIGNMENT_FIELD': widgetUtilityService.translate('recordDistribution.LABEL_ASSIGNMENT_FIELD'),
+            'LABEL_FILTER_CRITERIA': widgetUtilityService.translate('recordDistribution.LABEL_FILTER_CRITERIA'),
+            'LABEL_ICON_RECORD_VIEW': widgetUtilityService.translate('recordDistribution.LABEL_ICON_RECORD_VIEW'),
+            'LABEL_PICKLIST': widgetUtilityService.translate('recordDistribution.LABEL_PICKLIST'),
+            'LABEL_PICKLIST_ITEMS': widgetUtilityService.translate('recordDistribution.LABEL_PICKLIST_ITEMS'),
+            'LABEL_REC_ASGMT': widgetUtilityService.translate('recordDistribution.LABEL_REC_ASGMT'),
+            'LABEL_TITLE': widgetUtilityService.translate('recordDistribution.LABEL_TITLE'),
+            'LABEL_TITLE_RECORD_VIEW': widgetUtilityService.translate('recordDistribution.LABEL_TITLE_RECORD_VIEW'),
+            'OPTION_ALL': widgetUtilityService.translate('recordDistribution.OPTION_ALL'),
+            'OPTION_ONLY_ME': widgetUtilityService.translate('recordDistribution.OPTION_ONLY_ME'),
+            'PLACEHOLDER_SELECT_MODULE': widgetUtilityService.translate('recordDistribution.PLACEHOLDER_SELECT_MODULE'),
+            'RELATED_DATA_SOURCE_LABEL': widgetUtilityService.translate('recordDistribution.RELATED_DATA_SOURCE_LABEL'),
+            'SELECT_AN_OPTION': widgetUtilityService.translate('recordDistribution.SELECT_AN_OPTION'),
+            'SELECT_FIELD': widgetUtilityService.translate('recordDistribution.SELECT_FIELD'),
+            'TOOLTIP_ICON_RECORD_VIEW': widgetUtilityService.translate('recordDistribution.TOOLTIP_ICON_RECORD_VIEW'),
+            'TOOLTIP_PICKLIST': widgetUtilityService.translate('recordDistribution.TOOLTIP_PICKLIST'),
+            'TOOLTIP_PICKLIST_ITEMS': widgetUtilityService.translate('recordDistribution.TOOLTIP_PICKLIST_ITEMS'),
+            'TOOLTIP_SOURCE_LABEL': widgetUtilityService.translate('recordDistribution.TOOLTIP_SOURCE_LABEL'),
+            'TOOLTIP_SHOW_CO_REL_EDGES': widgetUtilityService.translate('recordDistribution.TOOLTIP_SHOW_CO_REL_EDGES'),
+            'TOOLTIP_TITLE_RECORD_VIEW': widgetUtilityService.translate('recordDistribution.TOOLTIP_TITLE_RECORD_VIEW')
+          };
+          $scope.sourceLabel = $scope.isDetailView ? $scope.viewWidgetVars.RELATED_DATA_SOURCE_LABEL : $scope.viewWidgetVars.DATA_SOURCE_LABEL;
+        });
+      } else {
+        $timeout(function() {
+          $scope.cancel();
+        });
+      }
+    }
+
     /*
      * The purpose of this initialize method is to create module list for populate
      * on configuration screen.
@@ -47,6 +88,8 @@
      * For View panel, only related modules of selected records are listed.
      */
     function _init() {
+      // To handle backward compatibility for widget
+      _handleTranslations();
       appModulesService.load(true).then(function (modules) {
         if ($scope.isDetailView) {
           var viewPanelEntity = FormEntityService.get();

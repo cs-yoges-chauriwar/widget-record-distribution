@@ -1,0 +1,32 @@
+{
+  "recordDistribution": {
+    "BTN_CLOSE": "关闭",
+    "BTN_SAVE": "保存",
+    "CHK_BOX_SHOW_CO_REL_EDGES": "显示相关边",
+    "DATA_SOURCE_LABEL": "数据源",
+    "HEADER_REC_DIS_EDIT_VIEW": "记录分布编辑视图",
+    "LABEL_ASSIGNMENT_FIELD": "分配字段",
+    "LABEL_CLOSE": "关闭",
+    "LABEL_FILTER_CRITERIA": "筛选条件",
+    "LABEL_ICON_RECORD_VIEW": "记录视图图标",
+    "LABEL_PICKLIST": "选项列表",
+    "LABEL_PICKLIST_ITEMS": "选项列表项",
+    "LABEL_REC_ASGMT": "记录分配（默认筛选器）",
+    "LABEL_TITLE": "标题",
+    "LABEL_TITLE_RECORD_VIEW": "记录视图标题",
+    "OPTION_ALL": "全部",
+    "OPTION_ONLY_ME": "仅我",
+    "PLACEHOLDER_SELECT_MODULE": "选择模块",
+    "RELATED_DATA_SOURCE_LABEL": "选择相关数据源",
+    "SELECT_AN_OPTION": "选择一个选项",
+    "SELECT_FIELD": "选择字段",
+    "TOOLTIP_ICON_RECORD_VIEW": "提供与记录图标关联的查找字段",
+    "TOOLTIP_PICKLIST": "选择要在所选模块中分组记录的选项列表。",
+    "TOOLTIP_PICKLIST_ITEMS": "选择要在小部件中显示的选项列表项。",
+    "TOOLTIP_SHOW_CO_REL_EDGES": "以线条显示记录之间的相关性",
+    "TOOLTIP_SOURCE_LABEL": "选择要分组的记录所在的模块。",
+    "TOOLTIP_TITLE_RECORD_VIEW": "提供要显示的标题字段。",
+    "TXT_NO_RECS_FOUND": "未找到记录！",
+    "TXT_VIEW_ALL_RECS": "查看所有记录"
+  }
+}
