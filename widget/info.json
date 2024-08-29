@@ -20,7 +20,7 @@
         ],
         "help_online": "https:\/\/github.com\/fortinet-fortisoar\/widget-record-distribution\/blob\/release\/1.0.3\/README.md",
         "compatibility": [
-            "7.2.2"
+            "7.6.1"
         ]
     }
 }
